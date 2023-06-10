@@ -1,0 +1,27 @@
+/*
+ * 01. Sourcemap
+ * 02. 
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+ 
+ /*
+  The one problem we can encounter with breaking our Sass into
+different files and controlling their output is that it can become very
+difficult to debug our CSS when things go wrong. Thankfully, in Sass
+3.3, source maps were introduced. You remember earlier when we
+first compiled our Sass into CSS two files were created: style.css
+and style.css.map? Well, the .css.map file is there to help us know
+where our CSS rules are coming from. The Development Inspector
+in most modern browsers would normally show us where a CSS rule
+is coming from by telling us the line of the CSS file that is applying
+that rule. That is no good to us when we have broken our Sass down
+into different files. With Source Maps, when we compile our CSS
+and view the end result in a browser, the Inspector will show us the
+location of the Sass rules that are affecting that element:
+ */

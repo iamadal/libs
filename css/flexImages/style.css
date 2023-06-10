@@ -1,0 +1,14 @@
+*::before,*::after,body,html {box-sizing:border-box; padding:0px; margin:0px;} // Reset
+.img-responsive {width:100%; height: auto;}
+dv {border:1px solid red;}
+
+.main {display: flex; flex-direction: column; flex-wrap: wrap;}
+
+
+@media (min-width:500px)
+{
+	.main {display: flex; flex-direction: row; flex-wrap: wrap;}
+	.box1 {flex: 1 0 30%;}
+	.box2 {flex: 1 0 30%;}
+	.box3 {flex: 1 0 30%;}
+}

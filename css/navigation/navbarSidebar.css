@@ -1,0 +1,41 @@
+/*
+  HTML Structure
+  *header
+      -div -- logo
+      -nav 
+     --ul
+      -div menu-toggle icon 
+ */
+
+
+
+/* Desktop mode */
+        header:root  
+        -div.logo : FL {logo}
+             -nav : FR
+              --ul: M+P=0 FLEX
+             ---li: LS_N 
+             ----a: DIS_B 
+  -div.menu-toggle: C FR LH FS CP DIS_N
+
+/* mobile screen #means changed in media query +means newly added - means ommit*/
+                  
+@media mw 991
+           
+            header: root  
+        -div.logo : FL {logo}
+             -nav : FR +(POS_A T50PX L-100%) TRAN 0.5s  +HGT 100vh-50px 
+       -nav.active: L0PX
+              --ul: M+P=0 #FLEX-->BLOCK
+             ---li: LS_N 
+             ----a: DIS_B 
+  -div.menu-toggle: C FR LH FS CP #DIS_N --> DIS_B
+
+/*
+ Events
+ 01. click menu toggle button add or remove class active
+
+*/
+
+
+/* ----------------------------------------------------- */

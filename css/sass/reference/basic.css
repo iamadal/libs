@@ -1,0 +1,222 @@
+/*
+ * 01. Variable  $varname:value;
+ * 02. flow control @if , @each
+ * 03. Top level statement, @use , @import , @mixin , @function
+ * 04. Special Function. url(), calc(), clamp(), element() , progid(), expression(),min(),max()
+ * 05. CSS BEM and SMACSS
+ */
+ 
+ /*Nesting */
+ 
+ ul
+ {
+	 li 
+	 {
+		 a
+		 {
+			 
+		 }
+	 }
+ }
+ 
+/*css & operator is used to reduce space*/
+
+ul     {}
+ul li  {}
+ul li a{}
+
+/*& Operator*/
+ul
+{
+  padding: 20px;  
+   &.slim 
+   {
+	   padding: 10px; 
+   }
+}
+
+/*Css & is used to reduce space &=immediate parent within nesting sequence*/
+
+ul {
+  padding: 20px;
+}
+ul.slim {
+  padding: 10px;
+}
+
+/*Hover and Focus state & = Parent selector*/
+
+a
+{
+	&:hover, &:focus {}
+	 
+}
+
+/*css*/
+a {}
+a:hover,a:focus{}
+
+/* scss */
+p 
+{
+	.article & 
+	{
+		
+	}
+}
+/* css */
+
+p {}
+.article p {}
+
+
+
+
+/* scss */
+
+.article h1 {
+background-color: #FFAFA5;
+.home & {
+background-color: #BBFCA2; }
+.about {
+background-color: #A0ADF1; }}
+
+/* css */
+.article h1 {
+background-color: #FFAFA5; }
+.home .article h1 {
+background-color: #BBFCA2; }
+.article h1 .about {
+background-color: #A0ADF1; }
+
+
+
+
+
+/* scss */
+.footer {
+font-size: 16px;
+&.footer-small {
+font-size: 12px; }}
+/* css */ 
+footer {
+font-size: 16px; }
+.footer-small {
+font-size: 12px; }
+
+
+
+/* scss */
+.article {
+margin: 20px 0;
+&__image {
+width: 40%; }
+&--small {
+width: 20%; }}
+
+/* css */ 
+.article {
+margin: 20px 0; }
+.article__image {
+width: 40%; }
+.article__image--small {
+width: 20%; }
+
+
+
+
+
+/* scss */
+.body {
+background: {
+color: #A1FF7F;
+image: url(tile.png);
+repeat: no-repeat;
+position: center; }}
+/* css */ 
+.body {
+background-color: #A1FF7F;
+background-image: url(tile.png);
+background-repeat: no-repeat;
+background-position: center; }
+
+
+/*sass extend for code reusability*/
+.form {
+border: 1px solid #219fe3;
+background: #7cc6ef; }
+.quote {
+border: 1px solid #219fe3;
+background: #7cc6ef;
+color: #000; }
+
+.quote {
+@extend .form;
+color: #000; }
+
+
+
+/* scss */
+.form, .quote {
+border: 1px solid #219fe3;
+background: #7cc6ef; }
+.quote {
+color: #000; }
+/* css */
+
+
+
+/*Placeholder selector*/ 
+/* scss */
+%list-style {
+list-style: none;
+padding: 0; }
+.list-group {
+@extend %list-style;
+margin: 2.5em 0 0.75em; }
+/* css */ 
+.list-group {
+list-style: none;
+padding: 0; }
+.list-group {
+margin: 2.5em 0 0.75em; }
+/* scss */
+
+/* css */ 
+
+/*Logical Math*/
+/* scss */
+.heading {
+font-size: (24 / 2) + px; }
+/* css */ 
+.heading {
+font-size: 12px; }
+/* scss */
+
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 
+/* scss */
+/* css */ 

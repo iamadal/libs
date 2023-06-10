@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get View Port</title>
+</head>
+<body>
+    <div class="content">
+        <h1>This is the Sample View Port</h1>
+    </div>
+</body>
+<style>
+    html,body,*::before, *::after {margin:0; padding: 0; box-sizing: border-box;}
+    .red {color: red; border: 1px solid red;}
+</style>
+<script>
+      window.onresize = function(){
+        const html = document.querySelector('html');
+      const xPos = html.clientWidth;
+      const yPos = html.clientHeight;
+      document.querySelector('.content h1').textContent = xPos + "px "+ yPos+ "px";
+      if( xPos > 455){
+          document.querySelector('.content').classList.add('red');
+      } else {
+          document.querySelector('.content').classList.remove('red');
+      }
+      }
+</script>
+</html>

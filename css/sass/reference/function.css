@@ -1,0 +1,73 @@
+/*
+ * 01. Difference between Function and mixin is 
+ * 02. instead of retruning code blocks, function return single value
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+ 
+ @function squared($number) {
+@return ($number * $number); }
+
+.text {
+padding: squared(10) + px; }
+
+.text {
+width: 20px; }
+
+
+
+
+
+@mixin font-type($font: 'base') {
+@if ($font == bold) {
+font-family:'Avenir-Demi'; }
+@else if ($font == italic) {
+font-family:'Avenir-LightItal'; }
+@else {
+font-family:'Avenir-Light'; }}
+
+.heading {
+@include font-type(bold); }
+
+
+
+@for $i from 1 through 10 {
+.col-#{$i} { width: (10% * $i); }}
+
+
+@for $i from 1 through length($pages) {
+body.section-#{$i} {
+background: nth($pages, $i); }}
+
+
+@each $item in $pages {
+body.section-#{ index($pages, $item)} {
+background: $item; }}
+
+$pages: (
+home: #F7E900,
+about: #FF5F09,
+news: #A0005E,
+links: #41004B);
+
+
+
+
+
+

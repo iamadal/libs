@@ -1,0 +1,141 @@
+/* Styles */
+
+/* css reset for cross browser */
+*::before, *::after {margin: 0; padding: 0;}
+body {
+       margin: 0;
+       padding: 0;
+       font-family: 'Roboto';
+}
+
+/* header */
+header{
+    /* use custom  positioning */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    /* padding-top
+       padding-right
+       padding-bottom
+       padding-left
+       
+       padding: 25px 50px;
+       top and bottom paddings are 25px
+       right and left paddings are 50px
+       */
+    padding: 0 100px;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+
+    /* make the header 100% */
+    width: 100%;
+    /* Box sizing */
+    box-sizing: border-box;
+}
+
+/* settings for logo section of our header */
+header .logo{
+     color: #000;
+     height: 50px;
+     line-height: 50px;
+     font-size: 24px;
+     float: left;
+     font-weight: bold;
+}
+
+/* navbar */
+header nav{
+    float: right;
+}
+
+header nav ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    list-style: none;
+}
+
+header nav ul li a {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    color: #000;
+    text-decoration: none ;
+    display: block;
+}
+
+header nav ul li a:hover,header > nav > ul > li > a:active {
+    color: #000;
+    background: #2196f3 ;
+}
+
+/* menu toggling - most important part */
+
+div.menu-toggle
+{
+    color: #fff;
+    float: right;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    /* do not display toggle menu bar in desktop */
+    display: none;
+}
+
+/* Place media queries at the bottom of the style sheet */
+
+@media (max-width: 991px)
+{
+    /* designed with desktop first mode - default setting will be applied to desktop  */
+    /* Change settings for mobile */
+    header {
+        padding: 0 20px;   
+    }
+    /* Display menu icon in mobile mode */
+    div.menu-toggle
+    {
+        display: block;
+    }
+    /* now remove navigation bar in mobile mode */
+    /* header nav {display: none;}  need to reposition the nav using absolute positioning*/
+    header nav
+    {
+        /* display: none will be applied in toggle mode */
+        position: absolute;
+        /* make it 100% wide */
+        width: 50%;
+        height: calc(100vh - 50px);
+        background: #333;
+        top: 50px;
+        /* in design mode left:0px but for production move it beyond the view port */
+        left: -100%;
+        /* then bring it back if user click on the toggle button */
+        transition: 0.5s;
+    }    
+
+    header nav ul
+    {
+        display: block;
+        /* align text to center */
+        text-align: center;  
+    }
+
+    header nav ul li a 
+    {
+        border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+
+    header nav.active {
+        /* this sudo class is used to bring back the navbar in mobile view */
+        left:0px;
+    }
+}
+
+
+
+
+
+color: #202124;

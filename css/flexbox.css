@@ -1,0 +1,170 @@
+/**
+  * 01. CSS Flexbox Complete Reference - Adal Khan - 26-04-2021 07:16PM GMT +06:00
+  * 02. Flexbox is one dimentional layout method 
+  * 03. Items will be placed in row or column
+  * 04. All items inside parent div is called flex item
+  * 05. x-axis = main axis , y-axis = cross axis
+  * 06. Layout flex items in reverse direction with row-reverse/column-reverse
+  * 07. Wrapping is possible within particular div with flex-wrap: wrap/no-wrap;
+  * 08. flex-direction & flex-wrap shorthand flex-flow: row wrap;
+  * 09. flex-basis: set initial lenght of flex item
+  * 10. If the size of all flex items is larger than the flex container, items shrink to fit according to flex-shrink.
+  */
+  
+  
+  /**
+    * Summery
+    * 01. Parent 
+    *         display: flex, flex-direction: column|row|row-reverse|column-reverse;
+    *       flex-wrap: wrap|no-wrap|wrap-reverse;
+    *       flex-flow: flex-direction flex-wrap; 
+    * justify-content: flex-start|flex-end|center|space-between|space-around|space-evenly
+    *     align-items: flex-start|flex-end|center|stretch|baseline
+    *   align-content: flex-start | flex-end | center | space-between | space-around | space-evenly | stretch | start | end | baseline | first baseline | last baseline + ... safe | unsafe;
+    *           
+    *    
+    * 02. Properties for Children
+    *      order: 1,2,3 or -1,-2,-3 +direction = L to R
+	*       flex: Unit Size
+	*       flex: Unit Size minimum width;
+	*  flex-grow: Unit Size (Grow if neccessary) if all item have 1 then all of them gets equal space. default 0
+	* flex-shirk: Unit Size (Shrink if neccessary)
+	* flex-basis: default Size Setup. default auto. if set zero then extra space around content isn't factored. if set auto extra space will be distributed using flex grow 
+	* align-self: auto|flex-start|flex-end|center|baseline|stretch
+	* float,clean, vertical-align have no effect on flex item
+	*
+	* Shorthand(Recommended)
+	* flex: flex-grow flex-shirk flex-basis;
+    */
+  div.container {display: flex;} // Parent Div 
+  div.container {flex-direction: column} // Reversing axis
+  div.container {flex-wrap: wrap/no-wrap}
+  div.container {flex-flow: row wrap} // flex-directiona and flex-wrap shorthand
+  
+  div.childOne   {flex:1 200px;} //Setup size of the child - minimum
+  div.childTwo   {flex: 1} // Space taken by child along with main axis
+  div.childThree {flex: 2} // Space taken by child along with main axis
+  
+  // Let we have total 400px div childOne take 100px, childTwo take 100px and 
+  // ChildThree take 300px;
+  
+  
+  //Tricks
+  
+.parent {
+  display: flex;
+  height: 300px; /* Or whatever */
+}
+
+.child {
+  width: 100px;  /* Or whatever */
+  height: 100px; /* Or whatever */
+  margin: auto;  /* Magic! */
+}
+
+
+.flex-container {
+  /* We first create a flex layout context */
+  display: flex;
+
+  /* Then we define the flow direction 
+     and if we allow the items to wrap 
+   * Remember this is the same as:
+   * flex-direction: row;
+   * flex-wrap: wrap;
+   */
+  flex-flow: row wrap;
+
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+}
+
+
+/* Large */
+.navigation {
+  display: flex;
+  flex-flow: row wrap;
+  /* This aligns items to the end line on main-axis */
+  justify-content: flex-end;
+}
+
+/* Medium screens */
+@media all and (max-width: 800px) {
+  .navigation {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    justify-content: space-around;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* We tell all items to be 100% width, via flex-basis */
+.wrapper > * {
+  flex: 1 100%;
+}
+
+/* We rely on source order for mobile-first approach
+ * in this case:
+ * 1. header
+ * 2. article
+ * 3. aside 1
+ * 4. aside 2
+ * 5. footer
+ */
+
+/* Medium screens */
+@media all and (min-width: 600px) {
+  /* We tell both sidebars to share a row */
+  .aside { flex: 1 auto; }
+}
+
+/* Large screens */
+@media all and (min-width: 800px) {
+  /* We invert order of first sidebar and main
+   * And tell the main element to take twice as much width as the other two sidebars 
+   */
+  .main    { flex: 2 0px; }
+  .aside-1 { order: 1; }
+  .main    { order: 2; }
+  .aside-2 { order: 3; }
+  .footer  { order: 4; }
+}
+
+
+// Settings on bootstrap
+
+.container {max-width: setup within media queries}
+
+.parent 
+{
+	  display: -ms-flexbox;
+      display: flex;
+    flex-wrap: wrap;
+-ms-flex-wrap: wrap;
+}
+
+.children
+{
+	-ms-flex: 0 0 50%;
+        flex: 0 0 50%; // 
+   max-width: 50%;
+}
+
+
+// in media queries
+ -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+
+
+
+
+  
+ 
+  
+  

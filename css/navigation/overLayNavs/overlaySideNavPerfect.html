@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto:ital,wght@0,300;1,400&display=swap"rel="stylesheet" />
+     <title>Overlay SideNav</title>
+</head>
+<body>
+<!--
+  -div.overlay
+  -div.menu-toggle
+  -nav
+  -div.content   
+-->
+  <div class="overlay" onclick="sidenav()">Overlay</div>
+  <div class="menu-toggle"  style="background-color:coral" onclick="sidenav();"> <svg  aria-label="menu" class="icon" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></div>
+  <nav>NavBar</nav>
+  <div class="content">Content</div>
+</body>
+<style>
+    
+    * {box-sizing: border-box ; border: 1px solid red;} html,body {margin: 0px; font-family: 'Roboto'}
+    
+    .menu-toggle      { position: fixed; z-index: 999;}
+    nav                  { background-color: cornflowerblue; display: inline-block;/* collapse navbar*/width: 225px; left: -225px; position: fixed;height: 100vh; }
+    body.sidenav .overly { background-color: rgba(2,34,22,0.5); /*when sidenav added to body fixed the overlay*/ top:0;left:0;right: 0;bottom: 0; /*position fixed div to (0,0) now set height*/ height: 100vh; width: 225px; transition: background-color 0.3s , transform 0.3s }
+    
+    nav , .menu-toggle , .overlay {transition: transform 0.3s} /* Default*/
+   
+    .sidenav nav ,.sidenav .menu-toggle ,.sidenav .overlay {transform: translateX(225px}} /*Activate when .sidebar class is present*/
+    
+    
+    
+    
+    .noscroll {position: relative; overflow: hidden /*toggle scroll bar*/}
+    
+</style>
+<script type="text/javascript">
+  function sidenav(){
+      document.body.classList.toggle('sidenav');
+      document.body.classList.toggle('noscroll');
+  }
+</script>
+</html>

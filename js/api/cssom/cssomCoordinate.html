@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSSOm Coordinate Testing</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+	<div class="content">
+		<p>Margin+Padding: 5px; border: 1px;  </p>
+		<p class="h">Div Size 300x300</p>
+		<p>offset margin border padding</p>
+	</div>
+</body>
+<style>
+    .content {border: 1px solid red; margin: 5px; padding: 5px; height: 300px; width: 300px;}
+</style>
+<script>
+ const d = document.querySelector(".content");
+    // pageOffsetX = scrollX are same. similarly pageOffsetY = scrollY
+ d.addEventListener("click",function(event){
+     console.log("------- Applied to Clicked Element ------------")
+     console.log("Client X(Visible Width) = "+event.clientX + "px")
+     console.log("Client Y(Visible Height) = "+event.clientY +"px")
+     console.log("---- size of visible area excluding margin ----")
+     console.log("offset X (Client X - Left Margin) = "+event.offsetX +"px")
+     console.log("offset Y (Client Y - Top Margin) = "+event.offsetY  +"px")
+     console.log("----- size of the active page --------------------")
+     console.log("Page X = Page Width = "+ event.pageX+"px")
+     console.log("Page Y = Page Height = "+ event.pageX+"px")
+     console.log("------- distance from actual screen ----------")
+     console.log("Screen X(Distance from Device Screen x-axis) = "+event.screenX);
+     console.log("Screen Y(Distance from Device Screen y-axis) = "+event.screenY);
+     console.log("--- if the element have scrollbar ---------------")
+     console.log("pageOffSet X = ScrollX = "+event.scrollX);
+     console.log("pageOffSet Y = ScrollY = "+event.scrollY);
+     console.log("--- available viewport size----")
+     console.log("Window InnerH = "+ window.innerHeight+"px")
+     console.log("Window InnerW = "+ window.innerWidth+"px")
+     console.log("------------------offset height----------------")
+     
+     
+ });
+	
+    /* offset > margin > border > padding
+     * Calculations - We have margin = 5px; border = 1px; padding: 5px;
+     * ClientX = margin+border+div position
+     * ClientY = same format
+     *
+     * offset x = (ClientX - (margin+border))
+     * offset y = (ClientY -(margin+border))
+     *
+     * PageX = ClientX in this case. but  pageX may be larger than laptop screen width
+     * PageY = ClientY in this case. but  pageY may be larger than laptop screen height
+     *
+     * ScreenX = Distance from Laptop screen along with x-axis
+     * ScreenY = Distance from Laptop screen along with y-axis
+     *
+     * pageOffsetX and pageOffsetY  undefined because we donot add any scrollbar to the div
+     * window.innerHeight = Available viewport height
+     * window.innerWidth = Available viewport Width
+     *
+     */
+</script>
+</html>

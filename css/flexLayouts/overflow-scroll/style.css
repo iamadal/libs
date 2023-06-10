@@ -1,0 +1,13 @@
+*,*::before,*::after , html, body {box-sizing: border-box; padding:0px; margin: 0px; font-family: segoe ui;}
+
+
+.navbar {background-color: #f1f1f1;}
+.navbar ul{margin:0;padding:0px;}
+.navbar ul li{display: inline-block;}
+.navbar ul li a{padding: 15px; display: block;}
+
+.container   {display: flex; flex-direction: row}
+.content     {flex: 1 0 75%; overflow-y: scroll; height: 700px}
+.sidebar     {flex: 1 0 10%; background-color: #ddd;}
+.sidebar > a {display: block; padding:5px; }
+.sidebar     {height: 700px; overflow-y: scroll;}

@@ -1,0 +1,62 @@
+/*
+ * 01. mixins - code produced by @extend and placeholder(%) are fixed. 
+ * 02. to create dynamic properties here comes mixins to rescue.
+ * 03. structure  @mixin mixin_name($variables) {output}
+ * 04. to use mixin we use @include method
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+ 
+ $base-font-size: 16;
+@mixin font-size($size) {
+font-size: $size + px;
+font-size: ($size / $base-font-size) + rem; }
+
+.box {
+@include font-size(24); }
+
+.box {
+font-size: 24px;
+font-size: 1.5rem; }
+
+/* ---------------- */
+
+@mixin font-size($size, $line-height) {
+font-size: $size + px;
+font-size: ($size / $base-font-size) + rem;
+line-height: ($line-height / $size); }
+
+.box {
+@include font-size(24, 32); }
+
+.box {
+font-size: 24px;
+font-size: 1.5rem;
+line-height: 1.33333; }
+
+
+@mixin clearfix {
+&:before,
+&:after {
+display: table;
+content: '';
+line-height: 0; }
+&:after {
+clear: both; }}
+
+form {
+@include clearfix; }
+
+

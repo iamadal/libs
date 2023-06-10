@@ -1,0 +1,12 @@
+/*
+ * :root select the root element
+ * define custom variables     --main-color: black;   it can be called using var() functions
+   var(--main-color)
+   :root {
+  --main-bg-color: brown;
+}  use this style. so that variables can be accessed globally
+
+ *  these custom properties are  case sensitive
+ 
+ 
+ */

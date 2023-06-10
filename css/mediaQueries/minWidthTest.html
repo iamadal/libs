@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>min-width Mobile First Design - Preferred Method for responsive Design</title>
+</head>
+<body>
+	<div class="content">
+		<p>Min Width Testing</p>
+	</div>
+	<style>
+		@media (min-width: 500px){
+			.content {
+				background-color: red;
+				/* if(screenSize >= 500) apply these rules*/
+			}
+		}
+		@media (min-width: 700px){
+			.content {
+				background-color: blue;
+				/* if(screenSize >= 700) then apply these rules*/
+			}
+		}
+
+  /* 0px ------  default rules ---------- 500px -----------> infinity (500px rules applied)  */
+  /* 0px ------  default rules ---------------| ------------ 700px -------------> infinity */
+  /* 0px ------  default rules ---------------| ------------------| ----------------------------- 1000px --------------> infinity
+  
+  /* min-width: 500px means if screen width is at lest 500px or more apply rules */
+  /* min-width: 700px means if screen width is at lest 700px or more apply rules */
+  /* max-width: 700px  means if screen width is at from 0 to max  700px then apply these rules */
+  /* max-width: 1000px means if screen width is at from 0 to max 1000px then apply these rules. note that 700px's rules will be override by 1000px's media queries's rules */
+
+
+	</style>
+</body>
+</html>

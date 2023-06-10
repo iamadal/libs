@@ -1,0 +1,120 @@
+01.
+Trendincolor: www.coolor.co
+Project will be managed in
+
+02. setup vs code 
+
+03. add b:css="false" at html tag to remove default css files
+
+04. create new blog.
+05. create new post
+05. Edit HTML and remove add.
+06. remove css using b:css="false" to html tag
+
+07. Transformation
+copy paste the code from our design
+
+08.  & is replaced with &amp; 
+09. adding skin 
+    <b:skin>
+    <![CDATA[
+       paste css code
+     ]]>
+  </b:skin>
+
+10. must have at least one section
+
+inside body
+
+<b:section id ="main"/>  inside section create widget
+
+
+11. widget for header
+
+<b:section id="header-container">
+     <b:widget id='Header1' type='header'></b:widget>
+</b:section> 
+
+press refresh now some automatically generate some code.
+now edit them
+
+includable and includes
+
+divide theme in some includable 
+
+adding a blog
+
+<b:section id="blog-container">
+  <b:widget id="blog1" type="blog"></b:widget>
+</b:section>
+
+
+most important
+
+if condition
+<b: if cond='data:blog.pageType =="index"'>
+   <h3>Index Page</h3>
+</b:if>
+
+
+Adding static 
+
+https://support.google.com/blogger/answer/46995
+
+
+search box
+
+<b:section id="search" class="">
+  <b:widget type="blogSearch"></b:widget>
+</b:section>
+
+https://sites.google.com/site/templateofdoom/Home/widget-tags-for-layouts
+
+https://support.google.com/blogger/answer/47270?hl=en
+
+
+
+<b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='1'></b:widget>
+
+
+
+
+
+----------------------------------
+
+remove css and js
+<html b:css='false' b:js='false'></html>
+<b:skin><![CDATA[]]></b:skin>
+<Variable name="damionRegular36" description="Damion Regular 36" type="font" default="400 36px Damion, cursive" hideEditor="true"  value="400 36px Damion, cursive"/>
+
+
+<Group description="Page Text">
+  <Variable name="body.text.font" description="Font"
+      type="font"
+      default="$(robotoNormal15)"  value="15px Roboto, sans-serif"/>
+  <Variable name="body.text.color" description="Color"
+      type="color"
+      default="#757575"  value="#757575"/>
+</Group>
+
+
+
+common widget
+-------------------
+<b:section class='container' id='header' name='Header' showaddelement='false'>
+<b:widget id='Header1' locked='true' title='Blogger REST Api Sample from Scatch (Header)' type='Header' visible='true'>
+<b:widget id='BlogArchive1' locked='false' mobile='yes' title='Blog Archive' type='BlogArchive' visible='true'>
+          <b:widget-settings>
+
+
+important classes
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:js='false' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+  <head>
+    <b:skin><![CDATA[]]></b:skin>
+  </head>
+  <body>
+    <b:section id='main'/>
+  </body>
+</html>

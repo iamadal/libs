@@ -1,0 +1,42 @@
+/*
+ * 01. divide project into grid,components, vendor etc 
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+ 
+ 
+ /*
+  The one problem with this approach is that, if we are using Sass to
+listen to changes in a folder, we will end up with CSS equivalents for
+each of these files, even if we’d like to output them all into a single
+CSS file. The way to avoid this is to use the underscore character
+(_) at the start of each filename. This tells Sass we are treating this
+as a partial file, to be included in other Sass files, but don’t want
+to output it as CSS. We don’t need to use the underscore when
+referencing the file in our Sass:
+ */
+ 
+ @media screen and (min-width: 640px) {
+@import url(tablet.css) }
+
+
+@media screen and (min-width: 640px) {
+@import 'views-tablet'; }
+
+// file _forms.scss
+@import 'forms';
+
+
+

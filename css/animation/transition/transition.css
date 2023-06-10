@@ -1,0 +1,61 @@
+/* w3shools.org
+ * 01. CSS transition: Transforming one state to another based on the event
+ * 02. Allows us to change property within certain period
+ * 03. Important Property: transition ,transition-delay,transition-duration,transition-property,transition-timing-function
+ * 04.  
+ * 05. transition-timing-function
+    ease - specifies a transition effect with a slow start, then fast, then end slowly (this is default)
+    linear - specifies a transition effect with the same speed from start to end
+    ease-in - specifies a transition effect with a slow start
+    ease-out - specifies a transition effect with a slow end
+    ease-in-out - specifies a transition effect with a slow start and end
+    cubic-bezier(n,n,n,n) - lets you define your own values in a cubic-bezier function
+ *
+ *
+ *
+ *
+ */
+ 
+ // transition: transition-property transition-duration transition-delay transition-duration transition-timing-function
+ 
+ div {
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition: all 2s;
+} 
+
+div:hover {
+  width: 300px;
+}
+
+// This transition will trigger width if hover event occurs. Within 2s div width change from 100px to 300px;
+
+div {
+  transition: width 2s, height 4s;
+}
+//change multiple properties.
+
+div {
+  transition-delay: 1s;
+}
+
+//Transition + Transformation
+
+div {
+  transition: width 2s, height 2s, transform 2s;
+}
+
+div:hover {
+  width: 300px;
+  height: 300px;
+  transform: rotate(180deg);
+}
+
+//
+div {
+  transition-property: width;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}

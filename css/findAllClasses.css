@@ -1,0 +1,1 @@
+Array.prototype.forEach.call(document.styleSheets[0].cssRules,function(a){console.log(a.selectorText)})

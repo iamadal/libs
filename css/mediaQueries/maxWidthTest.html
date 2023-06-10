@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<!-- Media Queries Test -->
+	<div class="content">
+		<p>Testing Max-Width</p>
+	</div>
+</body>
+ <style>
+    /* This is called desktop first design */
+ 	@media (max-width: 500px) {
+ 		/*
+ 		   if( screenSize <= 500 ) apply these rules
+ 		   min-width do the opposite things
+ 		   if(screenSize >= 500) apply these rules.  
+ 		 */
+ 		.content {
+ 			background-color: red;
+ 		}
+ 	}
+ 	
+ 	@media (max-width: 700px){
+ 		.content{
+ 			background-color: blue;
+ 			/*
+ 			  if(screenSize <= 700) apply these rules.
+ 			  note that max-width 500 also apply these rules
+ 			 */
+ 		}
+ 	}
+
+
+
+
+/* max-width 500px  = Apply css rules from 0px to 500px */
+/* max-width 700px  = Apply css rules from 0px to 700px including 500px */
+/* max-width 1000px = Apply css rules from 0px to 1000px including 500px and 700px */
+
+/* 0px -----------------------> 500px */
+/* 0px -----------------------| -------------------> 700px */
+/* 0px -----------------------| --------------------| -------------- > 1000px */ 
+/* 0px -----------------------| --------------------| ---------------| ---------------- > infinity  after 1000px default css rules will be applied. default means css rules out of media queries */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </style>
+</html>
+
+
+

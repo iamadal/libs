@@ -1,0 +1,45 @@
+/* structure of HTML */
+/*
+    -div.cover  used as cover for the document. and it will be faded if we open the navbar. onclick = toggle the navbar again
+    -div.menu-toggle  menu toggle icon. usually hidden in desktop mode and visible to mobile mode using mdedia queries
+     
+      -nav create the left side navbar  
+      --div.logo  hold the logo
+      --div.links create links for navbar
+      --footer holds the footer text
+     
+     -div.main
+      --section
+ */
+/* RESET CSS and border-box*/
+
+/* 
+   onClick menu-button: toggle menu and on overly click toggle menu
+   function toggleSidenav() {
+     document.body.classList.toggle('sidenav-active');  
+     document.body.classList.toggle('noscroll');
+     
+    .noscroll hide scrollbar + position relative
+    .sidenav-active 
+
+    note that we are toggling classess body element
+}
+ */
+
+ -div.menu-toggle                 : POS_F , ZI 999
+ -nav                             : BG_C ,  DIS_IB , POS_F , H + W , LEFT - , TRAN Transform
+body.sidenav-active  -div.overlay : BG_C ,  POS_F  ,  TP LF BT RH 0 , height: 100vh , TRAN BG_C 0.3s , transform 0.3s
+nav + menu-toggle + overlay       : TRAN transform 0.3s /* Default*/
+/* When sidenav-active class present */
+nav + menu-toggle + overlay       : transform: translateX(225px)  
+.noscroll                         : POS_R MAKE BODY RELATIVE OVERFLOW HIDE
+
+
+
+
+/*
+   when sidenav bar is added to the body then side navbar open make overly fixed and wide 100vh and 100xw then set onclik event so that if some one click on it then toggle class
+ */
+
+
+

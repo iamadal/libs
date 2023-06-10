@@ -1,0 +1,20 @@
+
+/*
+    Mobile First
+	0px             300px         500px      1000px    infinity
+	                                                   Desktop First
+ */
+
+*::before, *::after,html,body {margin:0px; padding:0px; box-sizing::border-box;}
+
+div   {border:1px solid red;}
+.main {display: flex; flex-direction: column;}
+
+/*media queries mobile first Design*/
+@media (min-width:996px)
+{
+    .main {flex-direction: row;}
+	.box1 {flex:1 0 30%;}
+	.box2 {flex:1 0 50%;}
+	.box3 {flex:1 0 20%;}
+}

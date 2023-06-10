@@ -1,0 +1,46 @@
+/*
+ * 01. Units
+ *     a. Absolute Units: cm,mm,in(1in = 96px = 2.54cm),pixels (1px = 1/96th of 1in),points (1pt = 1/72 of 1in),picas (1pc = 12 pt)
+ *     b. Relative Units: em   (2em means 2 times the size of the current font) 1em = 16px
+                          ex   (Relative to the x-height of the current font)
+                          ch   (Relative to the width of 0)
+                          rem  (Relative to font-size of the root element)
+                          %    (Relative to the parent element)
+ *                        vw   (1% viewport width) 
+                          vh   (1% viewport height) 
+                          vi   (1% of viewport's size in the root element's inline axis.) 
+                          vmax (maximum of the vh and vw) 
+                          vmin (minimum of the vh and vw)
+                          16px = 1em = 100% = 1 rem
+                          Pixel is a static measurement, while percent and EM are relative measurements. The size of an EM or percent depends on its parent. If the text size of body is 16 pixels, then 150% or 1.5 EM will be 24 pixels (1.5 * 16). Look at CSS Units for more measurement units.
+ *
+ * 02. 
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */

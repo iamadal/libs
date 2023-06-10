@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reative Position</title>
+</head>
+<body>
+	<div class="parent">
+		<p class="one">Child1</p>
+		<p class="two">Child2</p>
+		<p class="three">Child3</p>
+	</div>
+	<style>
+		.parent   {border: 1px solid blue;}
+		.one      {border: 1px solid red;   padding: 20px; position: relative; left: 20px; top: 10px; } /* Remain in normal flow. move it using left top etc*/
+		.two      {border: 1px solid red;   padding: 20px;}
+		.three    {border: 1px solid red; padding: 20px; }
+	/* z-index can be applied. in absolute positioning element come out from normal flow and we have to apply left top right and bottom proerty to move the element in our desire position*/
+
+	/* make parent relative and children absolute. to fit absoluted positoned element properly. if we do not do that absolute positioned element will be positon relative to body element*/
+	</style>
+</body>
+</html>

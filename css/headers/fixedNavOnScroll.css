@@ -1,0 +1,23 @@
+/* default setting - mobile first design*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+.fixedTop {
+    position: fixed; top:0px; left:0px; width: 100%; border: 1px 0px;
+}
+
+/* p + h1 select h1 which is immediate after p */
+/* to prevent quick movement we have added extra margin to the content*/
+.fixedTop + .content {padding-top: 102px;}
+
+div,header,nav {border: 1px solid transparent;}
+
+.navbar {background-color: #9b59b6; z-index: 99; }
+
+@media(min-width: 768px){
+    h1 {
+        color: red;
+    }
+}

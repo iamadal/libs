@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Overlay Test</title>
+</head>
+<body>
+	<div class="overlay cover" onclick ="overlay()" style="border:1px solid red">PP</div>
+	<div class="content">
+		<p>Sample Content</p>
+		<button onclick="overlay();">Overlay</button>
+	</div>
+</body>
+<style>
+	* {box-sizing: border-box;} html , body {margin: 0px;}
+     .cover {position: absolute; top: 0; left: 0px; right: 0px; bottom: 0px;}
+     .overlay {position: fixed; background-color: rgba(23,23,23,.5); top:0; bottom: 0px; right: 0px; left: 0px; transition: background-color  0.5s ;width: 100vw; height: 100vh; z-index: 99999}
+     .noscroll {overflow: hidden; position: relative;}
+</style>
+<script>
+	const m = document.querySelector()
+	function overlay(){
+		document.body.classList.toggle('overlay')
+		document.body.classList.toggle('noscroll')
+	}
+</script>
+</html>

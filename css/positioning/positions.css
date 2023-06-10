@@ -1,0 +1,51 @@
+/*01. There are 4 types of postion
+    a. static - fixed at any point
+    b. fixed -  fixed at any point
+    c. relative - it occupy space and push others in the queue
+    d. absolute - using left, right, top and bottom fixed the posion of the object and push it out of the normal flow
+    e. sticky - must include top property
+*/
+
+/*
+ * 01. Static = Default positioning of elements 
+ */
+
+ /*
+  * 01. Fixed - Fixing an element in a positon using left,top,right,bottom
+  * 
+  * Difference between absolue and Fixed is that when we scroll fixed element does not affected. but absolue positioned elements are affected
+  * 
+  */
+
+
+  /*
+   * Relative - by default it behave like static unless we use top, left, bottom ,right
+   * it does not come out from default flow. 
+   * z-index can be applied.
+   *  keeps normal flow. using left top we can move
+   * 
+   * 
+   */
+
+
+  /*
+   * Absolute
+   * 01. Loose any reference - comes out of the flow. and shrinks to contents. come out from the parent 
+   * 02. This element is moved from flow - contents will be shrink and position will be measured form Viewport
+   * 03. z-index do not work
+   * 
+   * 
+   * 
+   */
+
+
+   /*
+    * combine absolute and relative
+    * make children absolute and parent relative. then children cannot go beyond the parent. if relative in the parent is not defined then children will be absolute positon relative to body
+    */
+
+
+    /* Normal Flow */
+    /* <p> First Element </p> */
+    /* <p> 2nd Element </p> */
+    /* <p> 3rd Element </p>  this is the normal flow. stack wise placement of element*/

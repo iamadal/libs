@@ -1,0 +1,14 @@
+/* w3schools.org
+ * 01. attr()	Returns the value of an attribute of the selected element
+ * 02. calc()	Allows you to perform calculations to determine CSS property values
+ * 03. cubic-bezier()	Defines a Cubic Bezier curve
+ * 04. hsl()	Defines colors using the Hue-Saturation-Lightness model (HSL)
+ * 05. hsla()	Defines colors using the Hue-Saturation-Lightness-Alpha model (HSLA)
+ * 06. linear-gradient()	Sets a linear gradient as the background image. Define at least two colors (top to bottom)
+ * 07. radial-gradient()	Sets a radial gradient as the background image. Define at least two colors (center to edges)
+ * 08. repeating-linear-gradient()	Repeats a linear gradient
+ * 09. repeating-radial-gradient()	Repeats a radial gradient
+ * 10. rgb()	Defines colors using the Red-Green-Blue model (RGB)
+ * 11. rgba()	Defines colors using the Red-Green-Blue-Alpha model (RGBA)
+ * 12. var()	Inserts the value of a custom property
+ */
