@@ -1,2 +1,0 @@
-01. Full Screen mode in API 20
-<meta-data android:name="android.max_aspect" android:value="2.1" />
