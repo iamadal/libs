@@ -1,0 +1,13 @@
+'use this code to prevent close button from closing the window'
+
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+If CloseMode = vbFormControlMenu Then
+
+    Cancel = True
+    MsgBox "Please use the Close button to close the form", vbOKOnly
+
+End If
+End Sub
+
+'use this code to prevent close button from closing the window'
+----------------------------------------------------------------------
