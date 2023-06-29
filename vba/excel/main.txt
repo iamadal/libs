@@ -1,0 +1,25 @@
+
+illustration of different section - Microsoft Excel VBA - 26-06-23 Adal Khan
+VBA is an object-oriented programming language
+Many of Excel’s objects belong to collections.
+
+Worksheets("MySheet").Select == This is an example of collection
+
+
+Sub procedures: A set of programming instructions that performs some
+action. All recorded macros will be Sub procedures.
+
+Function procedures: A set of programming instructions that returns a
+single value (similar in concept to a worksheet function, such as Sum)
+
+A single VBA module can store any number of Sub procedures, Function
+procedures, and declarations. How you organize a VBA module is completely up
+to you. Some people prefer to keep all their VBA code for an application in a
+single VBA module; others like to split up the code into several different
+modules. It’s a personal choice, just like arranging furniture.
+
+
+
+
+
+
