@@ -3,7 +3,7 @@
 
 m.py -> m.pyc -> PVM
 
-impor math
+import math
 dir(math) # see all functions or properties inside math object
 
 'Types and Operation'
@@ -46,7 +46,7 @@ Sequence Operations
 >>> S[1] # The second item from the left
 'p'
 
->>> S[-1] # The last item from the end in S
+>>> S[-1] # The last item from the end in S =>> len-1 = -1 = 3 = s[3]
 'm'
 >>> S[-2] # The second-to-last item from the end
 'a'
