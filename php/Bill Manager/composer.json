@@ -1,0 +1,12 @@
+{ 
+	"autoload": 
+	{ 
+		"psr-4": 
+		  { 
+		      "Bms\\":"src/"
+		  } 
+		},
+	"require": {
+		"twig/twig": "^3.14"
+	}
+}
