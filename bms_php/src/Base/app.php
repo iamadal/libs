@@ -23,13 +23,14 @@ class app {
     public static function login(){
        $_SESSION['username_error']=null;
        $_SESSION['password_error']=null;
+
        if(isset($_SESSION['user'])){
           header('location: /info');
           exit();
         } else {
           self::init();
           $csrf_token = Web::generateCsrfToken();
-          echo self::$View->render('index.html',["csrf_token"=>$csrf_token,"username_error"=>$_SESSION['username_err']]);
+          echo self::$View->render('index.html',["csrf_token"=>$csrf_token]);
         }
 
 
@@ -61,7 +62,6 @@ class app {
 
     //
  public static function create_user(){
-        $_SESSION['username_err']=null;
         self::init();
         $csrf_token = Web::generateCsrfToken();
 
@@ -146,7 +146,6 @@ class app {
 
 
     public static function info(){
-        $_SESSION['username_err']=null;
         if(!isset($_SESSION['user'])){
             header('location: /');
         } else {
