@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&copy; BIAM 2024 </title>
+    <link rel="icon" href="img/fav.png" type="image/x-icon"> 
+    <link rel="stylesheet" href="css/styles.css"> 
+</head>
+<body>
+    
+  <div class="container bnFont box">
+        <div class="header">        
+               <ul>
+                <li> <img class="item" src="img/biam.png"></li>
+                 <li><p class="item bnFont">&nbsp; বিয়াম ফাউন্ডেশন, ঢাকা &nbsp; </p></li>
+            </ul>
+              <ul>
+           
+                 
+                 <li><a class="button" href="/">মূলপাতা &#9751;</a></li>
+            </ul>
+        </div>
+      
+      <form method="POST" action="/create_user">
+             <input class="bnFont" type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    
+            <input class="bnFont" type="text" name="username" placeholder="ইউজার আইডি(user@biam) ফরম্যাট" required>
+            <p class="red">{{username_error}}</p>
+    
+            <input class="bnFont" type="password" name="pass1" placeholder="পাসওয়ার্ড লিখুন(কমপক্ষে ৮ ডিজিট" required>
+            <input class="bnFont" type="password" name="pass2" placeholder="পাসওয়ার্ড পুনরায় লিখুন" required>
+            <p class="red">{{password_error}}</p>
+
+            <input class="bnFont" type="text" name="first_name" placeholder="আপনার নামের ১ম অংশ" required>
+    
+            <input class="bnFont" type="text" name="last_name" placeholder="আপনার নামের শেষ অংশ" required>
+
+            <input class="bnFont" type="tel" name="phone" placeholder="১১ ডিজিটের ফোন নম্বর(ইংরেজিতে)" required pattern="^\d{11}$" title="Enter a valid 11-digit phone number">
+            <button class="button bnFont" type="submit">আবেদন করুন &#9993;</button>
+    <p class="login-text bnFont">নতুন আইডির আবেদন ফর্ম </p>
+  </form>
+  </div>
+
+</body>
+<script src="script.js"></script> 
+</html>
