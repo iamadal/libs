@@ -4,6 +4,6 @@ namespace Components\Models;
 
 use Components\Base\Database;
 
-class User extends Database{
+class Bill extends Database{
 	
 }
