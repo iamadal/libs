@@ -4,14 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>System Admin</title>
+    <title>Find Bill - BIAM &copy;2024 </title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="fav.png">
 </head>
 <body>
-    <div class="dg-container">
-        <h1> Cashier </h1>
+    <div class="bill-container">
+        <div class="bill-header box">
+            <div class="left">
+                <ul>
+                    <li><img width="40px" height="auto" src="img/biam.png"></li>
+                    <li class="bnFont">বিয়াম ফাউন্ডেশন, ঢাকা</li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="middle bnFont"><p>বিয়াম ফাউন্ডেশনের বিলের তালিকা- (অর্থ বছর ২০২৪-২৫)</p></div>
+            <div class="right">
+                <ul>
+                    <li><a class="button bnFont" href="/find_bill?action=all">সকল বিল &#9997;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=food_bill">খাবারের বিল &#9749;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=hall_rent">হল ভাড়া &#9636;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=pending">বকেয়া বিল &#9785;</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bill-menu">
+
+        </div>
+        <div class="bill-result">
+            
+        <div class="content">
+            <!-- Rendering -->
+                {% if users is not empty %}
+    <table class="admin-table bnFont">
+        <tdead>
+            <tr class="fr">
+                <td>বিল আইডি</td>
+                <td>খাবার বিল</td>
+                <td></td>
+                <td>পদবী</td>
+                <td>ফোন নম্বর</td>
+                <td>দায়িত্ব</td>
+                <td>প্রাতিষ্ঠানিক পদবী</td>
+                <td>বর্তমান অবস্থা</td>
+                <td>আইডি খোলার তারিখ</td>
+                <td>REMOVE</td>
+            </tr>
+        </tdead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.role_name }}</td>
+                <td>{{ user.role_designation }}</td>
+                <td>{{ user.user_status }}</td>
+                <td>{{ user.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h3 class="admin-foot bnFont">ইউজার ডেটাবেজে কোন ইউজার নেই &#9760;</h3>
+    {% endif %}
+    <!-- End of Rendering -->
+
+
+        </div>
+        </div>
     </div>
 </body>
 </html>

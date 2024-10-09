@@ -15,8 +15,11 @@ use Components\Base\app;
 use Components\Database\Db;
 $setup = new Db();
 $setup->run();
-/*
 
+/*
+use Components\Database\Db;
+$setup = new Db();
+$setup->run();
 */
 
 Web::init();    
@@ -32,8 +35,11 @@ Web::get('/info',                       [app::class,'info']);
 Web::get('/delete_user',                [app::class,'delete_user']);
 Web::get('/admin_update',               [app::class,'admin_update']);
 
+Web::get('/find_bill',                  [app::class,'findBill']);
+
 Web::get('/director_general',           [app::class,'director_general']);
 Web::get('/director_admin',             [app::class,'director_admin']); 
+Web::get('/ad_admin',                   [app::class,'ad_admin']); 
 Web::get('/canteen_manager',            [app::class,'canteen_manager']); 
 Web::get('/admin_officer',              [app::class,'admin_officer']); 
 Web::get('/cashier',                    [app::class,'cashier']);  
@@ -44,7 +50,7 @@ Web::post('/' ,                         [app::class, 'login_submit']);
 Web::post('/sysadmin',                  [app::class, 'SysAdminLogin']); 
 Web::post('/create_user',               [app::class, 'create_user_submit']); 
 Web::post('/update_user',               [app::class, 'update_user_submit']);
-Web::post('/admin_update',              [app::class,'admin_update_submit']);
+Web::post('/admin_update',              [app::class, 'admin_update_submit']);
 
 Web::run();
 

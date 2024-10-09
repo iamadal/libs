@@ -21,7 +21,7 @@
             </ul>
               <ul>
            
-                 <li><a class="bnFont button" href="/admin_update">&#9960; আপডেট</a></li>
+                 <li><a class="bnFont button" href="/admin_update">&#9851; আপডেট</a></li>
                       <li><a class="bnFont button" href="/logout"> লগআউট &#9785;</a><i class="si-logout"></i></li>
             </ul>
         </div>
@@ -58,14 +58,14 @@
                 <td>{{ user.user_status }}</td>
                 <td>{{ user.created_at }}</td>
                 <td class="actions">
-                    <a class="button cl-red" href="/delete_user?username={{user.username}}"> &#10060;</a>
+                    <a class="button" href="/delete_user?username={{user.username}}"> &#9760;</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-        <h3 class="admin-foot bnFont">ইউজার ডেটাবেজে কোন ইউজার নেই &#9785;</h3>
+        <h3 class="admin-foot bnFont">ইউজার ডেটাবেজে কোন ইউজার নেই &#9760;</h3>
     {% endif %}
     <!-- End of Rendering -->
 

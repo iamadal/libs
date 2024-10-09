@@ -10,8 +10,8 @@ class DB {
 
     public function __construct($iniFilePath = 'db.ini') {
         $dbConfig = parse_ini_file($iniFilePath, true);
-        $host = $dbConfig['database']['host'];
-        $dbName = $dbConfig['database']['database'];
+        $host     = $dbConfig['database']['host'];
+        $dbName   = $dbConfig['database']['database'];
         $username = $dbConfig['database']['username'];
         $password = $dbConfig['database']['password'];
 
@@ -21,7 +21,6 @@ class DB {
             $this->pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbName` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             $this->pdo->exec("USE `$dbName`");
         } catch (PDOException $e) {
-            // Handle connection error silently in production
         }
     }
 
@@ -62,22 +61,32 @@ class DB {
     public function createBillsTable() {
         $query = "
             CREATE TABLE IF NOT EXISTS bills (
-                bill_id CHAR(12) PRIMARY KEY,
-                food_bill_amount DECIMAL(10, 2) DEFAULT 0.00 NOT NULL,
-                organization VARCHAR(100) NOT NULL,
-                bill_status ENUM('unpaid', 'paid') DEFAULT 'unpaid' NOT NULL,
-                hall_rent_amount DECIMAL(10, 2) DEFAULT 0.00 NOT NULL,
-                total_bill DECIMAL(10, 2) DEFAULT 0.00 NOT NULL,
-                bill_creator VARCHAR(50) NOT NULL,
-                hall_rent_added_by VARCHAR(50) NOT NULL,
-                mr_no VARCHAR(50) NOT NULL,
-                money_received_by VARCHAR(50) DEFAULT NULL, 
-                reviewed_by VARCHAR(50) DEFAULT 'none',
-                food_bill_status ENUM('sent', 'received', 'pending') DEFAULT 'pending' NOT NULL,
-                hall_rent_status ENUM('paid', 'unpaid') DEFAULT 'unpaid' NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            );
+                   id INT AUTO_INCREMENT PRIMARY KEY,
+                    bill_id VARCHAR(50) UNIQUE,
+                    description VARCHAR(255),
+                    food_bill DECIMAL(10, 2) DEFAULT 0.00,
+                    hall_rent DECIMAL(10, 2) DEFAULT 0.00,
+                    total_amount DECIMAL(10, 2) DEFAULT 0.00,
+                    paid_amount DECIMAL(10, 2) DEFAULT 0.00,
+                    due_amount DECIMAL(10, 2) DEFAULT 0.00,
+                    mr_no VARCHAR(50) DEFAULT 'unpaid',
+                    submitted_by VARCHAR(50) DEFAULT 'user',
+                    hall_rent_added_by VARCHAR(50) DEFAULT 'user',
+                    money_received_by VARCHAR(50) DEFAULT 'cashier',
+                    tag VARCHAR(50) DEFAULT 'none',
+                    fw_status VARCHAR(50) DEFAULT 'none',
+                    
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    
+                    -- Adding indexes to frequently searched columns
+                    INDEX (bill_id),
+                    INDEX (mr_no),
+                    INDEX (submitted_by),
+                    INDEX (hall_rent_added_by),
+                    INDEX (money_received_by),
+                    INDEX (tag)
+                );
         ";
         $this->pdo->exec($query);
     }

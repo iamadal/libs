@@ -19,8 +19,8 @@
                  <li><p class="item bnFont">&nbsp; বিয়াম ফাউন্ডেশন, ঢাকা &nbsp; </p></li>
             </ul>
               <ul>
-           
-                 <li><a class="button" href="/create_user">নতুন আইডি &#9882;</a></li>
+                 <li><a class="button" href="/about">নির্দেশনা &#9728;</a></li>
+                 <li><a class="button" href="/create_user">সাইনআপ &#9728;</a></li>
                  <li><a  class="button" href="/find_bill">বিল অনুসন্ধান &#9883;</a></li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
                 <button class="button bnFont" type="submit">লগইন &#10010;</button>
                 <p class="login-text bnFont">{{username_error}}</p>
             </form>
-         <p class="login-text bnFont">বিল ম্যানেজমেন্ট সিস্টেম &copy; 2024 v1.0 </p>
+         <p class="login-text bnFont">BIAM BMS &copy;2024 v1.0 </p>
      </div>
 
     
