@@ -25,7 +25,7 @@
       <form method="POST" action="/admin_update">
              <input class="bnFont" type="hidden" name="csrf_token" value="{{ csrf_token }}">
     
-            <input class="bnFont" type="text" name="username" placeholder="ইউজার আইডি(user@biam) ফরম্যাট" required>
+            <input class="bnFont" type="text" name="username" value="{{username}}" placeholder="ইউজার আইডি(user@biam) ফরম্যাট" required readonly>
             <p class="red">{{username_error}}</p>
 
              <div class="admin_update">

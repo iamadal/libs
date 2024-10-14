@@ -10,6 +10,8 @@ use Components\Models\SysAdmin;
 use Components\Models\User;
 use Components\Models\Bill;
 
+$_SESSION['notice'] = 'বিল অনুসন্ধান';
+
 class app {
     private static $View;
     
@@ -239,7 +241,13 @@ class app {
    public static function admin_update(){
     if(isset($_SESSION['username'])=="__admin"){
           self::init();
-          echo self::$View->render('admin_update.cs_',["csrf_token"=>Web::generateCsrfToken(),"username_error"=>$_SESSION['username_error']]);
+
+         if(isset($_GET['action'])){
+            $get_user = $_GET['action'];
+         } else {
+            $get_user = "";
+         }
+          echo self::$View->render('admin_update.cs_',["csrf_token"=>Web::generateCsrfToken(),"username_error"=>$_SESSION['username_error'],"username"=>$get_user]);
     } else {
      header('location: /sysadmin');
      exit();
@@ -357,25 +365,33 @@ class app {
             $result = $db->all(); 
             break;
 
-            case 'food_bill':
-            $msg = "Food bill list shown";
+            case 'hall':
+            $result = $db->hall();
+            break;
+            
+            case 'food':
+            $result = $db->food();
             break;
 
-            case 'hall_rent':
-            $msg = "Hall Rent list Shown";
-            break;
+            case 'paid':
+            $result = $db->paid();
 
-            case 'unpaid':
-            $msg = "Unpaid bills";
+            case 'due':
+            $result = $db->due_amount();
             break;
 
             default:
-            $msg = "No Bill selected";
+            $result = $db->search($_GET['action']);
             break;
           }
         } 
+        if(!empty($result)){
+            $c = $result;
+        } else {
+            $c = [];
+        }
         self::init();
-        echo self::$View->render('bill_query.cs_',["users"=>$result]);
+        echo self::$View->render('bill_query.cs_',["users"=>$result,"notice"=>$_SESSION['notice'],"search_item"=>count($c)]);
     }
     public static function logout(){
         session_unset();

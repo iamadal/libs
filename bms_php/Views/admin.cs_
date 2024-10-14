@@ -21,7 +21,6 @@
             </ul>
               <ul>
            
-                 <li><a class="bnFont button" href="/admin_update">&#9851; আপডেট</a></li>
                       <li><a class="bnFont button" href="/logout"> লগআউট &#9785;</a><i class="si-logout"></i></li>
             </ul>
         </div>
@@ -42,14 +41,14 @@
                 <td>প্রাতিষ্ঠানিক পদবী</td>
                 <td>বর্তমান অবস্থা</td>
                 <td>আইডি খোলার তারিখ</td>
-                <td>REMOVE</td>
+                <td>বিযুক্ত করুন</td>
             </tr>
         </tdead>
         <tbody>
             {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
+                <td><a href="/admin_update?action={{user.username}}">{{ user.username }}</a></td>
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
                 <td>{{ user.phone }}</td>

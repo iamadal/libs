@@ -49,7 +49,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus   { bo
     --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
     --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
-    border:  1px solid #04AA6D;
+    border:  1px solid #04AA6D; background-color: #fff;
 
 }
 
@@ -74,11 +74,24 @@ td#first_row {text-align: center !important;}
 }
 .admin-table   {border-collapse: collapse; margin: 30px auto;}
 .admin-table .fr {background: #04AA6D; font-size: 18px !important; color: #fff; }
-.admin-table .fr:hover { background: #04AA6D;  color: #fff; font-weight: bold; }
-.admin-table td,th {border-bottom: 1px solid #eee;  padding: 3px 20px; font-size: 14px; text-align: center;}
+.admin-table td,th {border-bottom: 1px solid #eee; padding: 3px 5px; font-size: 14px; text-align: center;}
 .admin-table tr:hover {background-color: #f1f1f1; transition: .5s; cursor: pointer;}
 
+marquee {margin: 5px; background-color: #04AA6D ; color:  #fff}
+
+.red {color:  red}
+
+
 .admin-foot {color:  red; text-align: center; padding: 20px;}
+
+.Search-box {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: unset;
+    align-items: center;
+}
+
+
 
 
 select.admin-menu.bnFont {
@@ -167,6 +180,7 @@ select.admin-menu.bnFont {
 }
 
 
+.bill-header {position: sticky; top: 0px; z-index: 999999999999999;}
 .bill-container .bill-header ul,li     {display: flex; justify-content: space-between; align-items: center; padding: 2px;}
 .bill-container .bill-header .middle   {display: flex; justify-content: center; align-items: center;}
 .bill-container .bill-header .middle p {font-weight: bold;}

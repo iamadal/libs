@@ -12,9 +12,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Components\Base\Web;
 use Components\Base\app;
-use Components\Database\Db;
-$setup = new Db();
-$setup->run();
 
 /*
 use Components\Database\Db;

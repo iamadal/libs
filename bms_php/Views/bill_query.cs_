@@ -16,60 +16,68 @@
                 <ul>
                     <li><img width="40px" height="auto" src="img/biam.png"></li>
                     <li class="bnFont">বিয়াম ফাউন্ডেশন, ঢাকা</li>
-                    <li></li>
+                    <li class="bnFont">{{total_bill}}  {{due_bill}}</li>
                 </ul>
             </div>
-            <div class="middle bnFont"><p>বিয়াম ফাউন্ডেশনের বিলের তালিকা- (অর্থ বছর ২০২৪-২৫)</p></div>
+            <div class="middle bnFont"><p>বিলের তালিকা(অর্থ বছর ২০২৪-২৫)</p></div>
             <div class="right">
                 <ul>
                     <li><a class="button bnFont" href="/find_bill?action=all">সকল বিল &#9997;</a></li>
-                    <li><a class="button bnFont" href="/find_bill?action=food_bill">খাবারের বিল &#9749;</a></li>
-                    <li><a class="button bnFont" href="/find_bill?action=hall_rent">হল ভাড়া &#9636;</a></li>
-                    <li><a class="button bnFont" href="/find_bill?action=pending">বকেয়া বিল &#9785;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=food">খাবার বিল &#9997;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=hall">হল ভাড়া &#9997;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=paid">পরিশোধকৃত &#9997;</a></li>
+                    <li><a class="button bnFont" href="/find_bill?action=due">বকেয়া বিল &#9785;</a></li>
                 </ul>
             </div>
         </div>
         <div class="bill-menu">
-
+        <marquee class="bnFont" scrollamount="3" direction="left">{{notice}}</marquee>
         </div>
         <div class="bill-result">
             
         <div class="content">
             <!-- Rendering -->
                 {% if users is not empty %}
+                <div class="Search-box">
+                     <form method="GET" action="/find_bill"> <input class="bnFont"  type="text" name="action" placeholder="বিল নম্বর অথবা সংস্থা  কোড লিখুন"> <input class="button" type="submit" value="Search">  </form>
+                </div>
+               
+
     <table class="admin-table bnFont">
+        <tr><td>Total item = {{search_item}}</td></tr>
         <tdead>
             <tr class="fr">
                 <td>বিল আইডি</td>
+                <td>বিবরণ</td>
                 <td>খাবার বিল</td>
-                <td></td>
-                <td>পদবী</td>
-                <td>ফোন নম্বর</td>
-                <td>দায়িত্ব</td>
-                <td>প্রাতিষ্ঠানিক পদবী</td>
-                <td>বর্তমান অবস্থা</td>
-                <td>আইডি খোলার তারিখ</td>
-                <td>REMOVE</td>
+                <td>হলভাড়া</td>
+                <td>মোট বিল</td>
+                <td>পরিশোধকৃত বিল</td>
+                <td>বকেয়া</td>
+                <td>মানি রিসিট নং</td>
+                <td>বিল তৈরীর তারিখ</td>
+                <td>প্রত্যাশী প্রতিষ্ঠান</td>
             </tr>
         </tdead>
         <tbody>
             {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.first_name }}</td>
-                <td>{{ user.last_name }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.role_name }}</td>
-                <td>{{ user.role_designation }}</td>
-                <td>{{ user.user_status }}</td>
-                <td>{{ user.created_at }}</td>
+                <td>{{ user.bill_id }}</td>
+                <td>{{ user.description }}</td>
+                <td>{{ user.food_bill }}</td>
+                <td>{{ user.hall_rent }}</td>
+                <td>{{ user.total_amount }}</td>
+                <td>{{ user.paid_amount }}</td>
+                <td class="red">{{ user.due_amount }}</td>
+                <td>{{ user.mr_no }}</td>
+                <td>{{ user.updated_at }}</td>
+                <td>{{ user.tag }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-        <h3 class="admin-foot bnFont">ইউজার ডেটাবেজে কোন ইউজার নেই &#9760;</h3>
+        <h4 class="admin-foot bnFont">অনুগ্রহ করে বিলের ধরণ নির্বাচন করুন অথবা সকল বিল নির্বচন করুন </h4>
     {% endif %}
     <!-- End of Rendering -->
 
