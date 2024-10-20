@@ -41,6 +41,7 @@ Web::get('/canteen_manager',            [app::class,'canteen_manager']);
 Web::get('/admin_officer',              [app::class,'admin_officer']); 
 Web::get('/cashier',                    [app::class,'cashier']);  
 Web::get('/computer_operator',          [app::class,'computer_operator']); 
+Web::get('/canteen_manager',            [app::class,'canteen_manager']);
 
 
 Web::post('/' ,                         [app::class, 'login_submit']); 
@@ -48,6 +49,7 @@ Web::post('/sysadmin',                  [app::class, 'SysAdminLogin']);
 Web::post('/create_user',               [app::class, 'create_user_submit']); 
 Web::post('/update_user',               [app::class, 'update_user_submit']);
 Web::post('/admin_update',              [app::class, 'admin_update_submit']);
+Web::post('/computer_operator',         [app::class,'create_bill']);
 
 Web::run();
 

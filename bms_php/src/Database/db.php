@@ -75,7 +75,7 @@ class DB {
                     money_received_by VARCHAR(50) DEFAULT 'cashier',
                     tag VARCHAR(50) DEFAULT 'none',
                     fw_status VARCHAR(50) DEFAULT 'none',
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    created_at datetime DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     
                     -- Adding indexes to frequently searched columns

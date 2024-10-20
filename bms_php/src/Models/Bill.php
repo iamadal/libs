@@ -27,6 +27,39 @@ class Bill extends Database {
         }
     }
 
+
+        public function all_co() {
+        // Correct SQL query: fw_status should be in quotes
+        $sql = "SELECT * FROM " . $this->table . " WHERE fw_status = 'canteen_manager'";
+
+        try {
+            $stmt = $this->pdo->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all results as an associative array
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return []; 
+        }
+    }
+
+
+            public function all_ao() {
+        // Correct SQL query: fw_status should be in quotes
+        $sql = "SELECT * FROM " . $this->table . " WHERE fw_status = 'admin_officer'";
+
+        try {
+            $stmt = $this->pdo->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all results as an associative array
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return []; 
+        }
+    }
+
+
+
+
+
+
     public function due_amount() {
         // Refined query to focus on bills with a due amount
         $sql = "SELECT * FROM " . $this->table . " WHERE due_amount > 0";
@@ -42,7 +75,7 @@ class Bill extends Database {
 
     public function food() {
         // Refined query to focus on bills with no hall rent
-        $sql = "SELECT * FROM " . $this->table . " WHERE hall_rent = 0";
+        $sql = "SELECT * FROM " . $this->table . " WHERE hall_rent = 0 AND fw_status='released' ";
 
         try {
             $stmt = $this->pdo->query($sql);
@@ -55,7 +88,7 @@ class Bill extends Database {
 
     public function hall() {
         // Refined query to focus on bills with hall rent
-        $sql = "SELECT * FROM " . $this->table . " WHERE hall_rent > 0";
+        $sql = "SELECT * FROM " . $this->table . " WHERE hall_rent > 0 AND fw_status='released'";
 
         try {
             $stmt = $this->pdo->query($sql);
@@ -68,7 +101,7 @@ class Bill extends Database {
 
         public function paid() {
         // Refined query to focus on bills with hall rent
-        $sql = "SELECT * FROM " . $this->table . " WHERE due_amount = 0";
+        $sql = "SELECT * FROM " . $this->table . " WHERE due_amount = 0 AND fw_status='released'";
 
         try {
             $stmt = $this->pdo->query($sql);
@@ -79,12 +112,24 @@ class Bill extends Database {
         }
     }
 
+  
+
+    public function findBill($bill_id) {
+        $sql = "SELECT * FROM bills WHERE bill_id = :bill_id"; 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['bill_id' => $bill_id]);
+        return $stmt->fetch();
+    }
+
 
 
 
 
     public function search($query) {
-        $sql = "SELECT * FROM " . $this->table . " WHERE bill_id LIKE :query OR tag LIKE :query";
+       $sql = "SELECT * FROM " . $this->table . " 
+        WHERE (bill_id LIKE :query OR tag LIKE :query) 
+        AND fw_status = 'released'";
+
         
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -96,20 +141,67 @@ class Bill extends Database {
         }
     }
 
+   
+  public function forward_ao($bill_id, $fw_status) {
+    $sql = "UPDATE bills SET fw_status = :fw_status WHERE bill_id = :bill_id"; 
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['bill_id' => $bill_id, 'fw_status' => $fw_status]);
+}
 
-          public function create($bill_id, $description, $food_bill, $hall_rent, $total_amount, $received_amount, $due_amount, $mr_no, $submitted_by, $fw_status) {
-        $sql = "INSERT INTO users (username, password, first_name, last_name, phone, image_url) 
-                VALUES (:username, :password, :first_name, :last_name, :phone, :image_url)"; 
+
+
+   public function delete_bill($bill_id) {
+        $sql = "DELETE FROM bills WHERE bill_id = :bill_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['bill_id' => $bill_id]);
+}
+    
+
+public function add_hall_rent($bill_id, $hall_rent, $total_amount, $due_amount, $Updated_by) {
+    $fw_status = 'released';
+    $sql = "UPDATE bills SET hall_rent = :hall_rent, total_amount = :total_amount, due_amount = :due_amount, fw_status = :fw_status, Updated_by = :Updated_by WHERE bill_id = :bill_id";
+    
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        'hall_rent'    => $hall_rent,    
+        'total_amount' => $total_amount, 
+        'due_amount'   => $due_amount,     
+        'bill_id'      => $bill_id,         
+        'fw_status'    => $fw_status,
+        'Updated_by'   => $Updated_by        
+    ]);
+}
+
+
+
+
+ public function create_bill($bill_id, $description, $food_bill, $total_amount, $paid_amount, $due_amount, $mr_no, $submitted_by, $tag, $fw_status) {
+        $sql = "INSERT INTO bills (bill_id, description, food_bill, total_amount, paid_amount, due_amount,  mr_no, submitted_by, tag, fw_status) 
+                VALUES (:bill_id, :description, :food_bill, :total_amount, :paid_amount, :due_amount, :mr_no, :submitted_by, :tag, :fw_status)"; 
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            'username' => $username,
-            'password' => password_hash($password, PASSWORD_BCRYPT),  // Hashing the password for security
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'phone' => $phone,
-            'image_url' => $image_url
+            'bill_id' => $bill_id,
+            'description' => $description,  
+            'food_bill' => $food_bill,
+            'total_amount' => $total_amount,
+            'paid_amount' => $paid_amount,
+            'due_amount' => $due_amount,
+            'mr_no' => $mr_no,
+            'submitted_by'=>$submitted_by,
+            'tag' => $tag,
+            'fw_status'=>$fw_status
         ]);
     }
+
+public function due_bill() {
+    $sql = "SELECT * FROM bills WHERE due_amount > 0"; 
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(); // Execute the statement
+
+    // Fetch all rows that match the query
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Return as an associative array
+}
+
 
 
 

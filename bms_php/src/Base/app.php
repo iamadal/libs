@@ -10,7 +10,9 @@ use Components\Models\SysAdmin;
 use Components\Models\User;
 use Components\Models\Bill;
 
-$_SESSION['notice'] = 'বিল অনুসন্ধান';
+ob_start();
+
+$_SESSION['notice'] = 'Bangladesh Administrative Service Association - BASA, BCS Welfare Trust - BCSWT';
 
 class app {
     private static $View;
@@ -306,8 +308,34 @@ class app {
     }
     public static function canteen_manager(){
         if($_SESSION['role'] == "canteen_manager"){
+                $bills = new Bill();
+                $bdata = $bills->all_co();
+                $db    = new User();
+                $data  = $db->findUser($_SESSION['user']); 
                 self::init();
-           echo self::$View->render('canteen_manager.cs_');
+           echo self::$View->render('canteen_manager.cs_',[
+            "first_name"=>$data['first_name'],
+            "last_name"=>$data['last_name'],
+            "role_name"=>$data['role_designation'],"users"=>$bdata]);
+
+
+           if(isset($_GET['delete'])){
+                 $bills = new Bill();
+                 $bills->delete_bill($_GET['delete']);
+                 header('location: /canteen_manager');
+                 exit();
+           }
+
+            if(isset($_GET['forward'])){
+                 $bills = new Bill();
+                 $bills->forward_ao($_GET['forward'],'admin_officer');
+                 header('location: /canteen_manager');
+                 exit();
+           }
+
+
+
+
         } else {
             session_unset();
             session_destroy();
@@ -318,7 +346,41 @@ class app {
     public static function admin_officer(){
       if($_SESSION['role'] == "admin_officer"){
                 self::init();
-           echo self::$View->render('admin_officer.cs_');
+               
+                $bills = new Bill();
+                $bdata = $bills->all_ao();
+                $db    = new User();
+                $data  = $db->findUser($_SESSION['user']); 
+                self::init();
+                echo self::$View->render('admin_officer.cs_',[
+               "first_name"=>$data['first_name'],
+               "last_name" =>$data['last_name'],
+               "role_name" =>$data['role_designation'],"users"=>$bdata]);
+
+
+           if(isset($_GET['hall_rent']) && isset($_GET['bill_id'])){
+               $bills        = new Bill();
+               $hall_rent    = trim(Web::sanitize($_GET['hall_rent']));
+               $food_bill    = $bills->findBill($_GET['bill_id']);
+               $total_amount = $food_bill['food_bill']+$hall_rent;
+               $due_amount   = $food_bill['due_amount']+$hall_rent;
+
+               $bills->add_hall_rent($_GET['bill_id'],$hall_rent,$total_amount,$due_amount,$_SESSION['user']);
+               header('location: /admin_officer');
+               exit();
+
+           }
+
+
+           if(isset($_GET['backward'])){
+               $bills = new Bill();
+               $bills->forward_ao($_GET['backward'],'canteen_manager');
+               header('location: /admin_officer');
+               exit();
+          }
+
+
+       
         } else {
             session_unset();
             session_destroy();
@@ -327,15 +389,25 @@ class app {
         }
     }
     public static function computer_operator(){
+        $_SESSION['bill_created'] = "";
        if($_SESSION['role'] == "computer_operator"){
-            $db   = new User();
-            $data = $db->findUser($_SESSION['user']); 
+            $db    = new User();
+            $bills = new Bill();
+            $data_bill = $bills->all_co();
+            $data  = $db->findUser($_SESSION['user']); 
+
                 self::init();
            echo self::$View->render('computer_operator.cs_',[
             "username"=>$_SESSION['user'],
             "first_name"=>$data['first_name'],
             "last_name"=>$data['last_name'],
-            "role_name"=>$data['role_designation']]);
+            "role_name"=>$data['role_designation'],
+            "csrf_token"=>Web::generateCsrfToken(),
+            "submitted"=>$_SESSION['bill_created'],
+            "users"=>$data_bill
+
+        ]);
+
         } else {
             session_unset();
             session_destroy();
@@ -343,10 +415,76 @@ class app {
             exit();
         }
     }
+    public static function create_bill(){
+
+
+         if($_SESSION['role'] == "computer_operator"){
+
+
+
+
+            $db = new bill();
+            $data  = $db->findBill($_POST['bill_id']);
+
+
+
+            if(!$data){
+            $bill_id      = trim(Web::sanitize($_POST['bill_id']));
+            $description  = trim(Web::sanitize($_POST['description']));
+            $food_bill    = trim(Web::sanitize($_POST['food_bill']));
+            $paid_amount  = trim(Web::sanitize($_POST['paid_amount']));
+            $mr_no        = trim(Web::sanitize($_POST['mr_no']));
+            $tag          = trim(Web::sanitize($_POST['tag']));
+            $total_amount = $food_bill;
+            $due_amount   = $food_bill-$paid_amount;
+            $fw_status    = 'canteen_manager';
+            $submitted_by = $_SESSION['user'];
+
+            $db           = new Bill();
+            
+            $data = $db->create_bill($bill_id,$description,$food_bill,$total_amount,$paid_amount,$due_amount,$mr_no,$submitted_by,$tag,$fw_status);
+             header('location: /computer_operator');
+             exit();
+            
+            exit();
+            }  else {
+                header('location: /computer_operator');
+                exit();
+
+            }
+
+
+
+
+
+        } else {
+            session_unset();
+            session_destroy();
+            header('location: /');
+            exit();
+        }
+
+
+
+
+
+
+
+
+    }
     public static function cashier(){
         if($_SESSION['role'] == "cashier"){
                 self::init();
-           echo self::$View->render('cashier.cs_');
+                $bills = new Bill();
+                $bdata = $bills->due_bill();
+                $db    = new User();
+                $data  = $db->findUser($_SESSION['user']); 
+
+                self::init();
+                echo self::$View->render('cashier.cs_',[
+               "first_name"=>$data['first_name'],
+               "last_name" =>$data['last_name'],
+               "role_name" =>$data['role_designation'],"users"=>$bdata]);
         } else {
             session_unset();
             session_destroy();
@@ -380,6 +518,10 @@ class app {
             $result = $db->due_amount();
             break;
 
+            case '':
+            $result = $db->all();
+            break;
+
             default:
             $result = $db->search($_GET['action']);
             break;
@@ -399,4 +541,8 @@ class app {
         header('Location: /');
         exit();
     }
+
+
+
+
 }

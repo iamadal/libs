@@ -22,6 +22,7 @@
             <div class="middle bnFont"><p>বিলের তালিকা(অর্থ বছর ২০২৪-২৫)</p></div>
             <div class="right">
                 <ul>
+                    <li><a class="button bnFont" href="/">মূলপাতা &#9997;</a></li>
                     <li><a class="button bnFont" href="/find_bill?action=all">সকল বিল &#9997;</a></li>
                     <li><a class="button bnFont" href="/find_bill?action=food">খাবার বিল &#9997;</a></li>
                     <li><a class="button bnFont" href="/find_bill?action=hall">হল ভাড়া &#9997;</a></li>
@@ -40,11 +41,20 @@
                 {% if users is not empty %}
                 <div class="Search-box">
                      <form method="GET" action="/find_bill"> <input class="bnFont"  type="text" name="action" placeholder="বিল নম্বর অথবা সংস্থা  কোড লিখুন"> <input class="button" type="submit" value="Search">  </form>
+                     <form method="GET" action="/find_bill?st=start-date&ed=end-date">
+                         <input type="date" name="start-date" class="admin-update bnFont" required>
+                         <input type="date" name="end-date"   class="admin-update bnFont" required>
+                         <input type="submit" class="bnFont button" value="উক্ত তারিখের মধ্যে বিল">
+                     </form>
                 </div>
+
+
                
 
     <table class="admin-table bnFont">
-        <tr><td>Total item = {{search_item}}</td></tr>
+        <tr>
+            <td>Total item = {{search_item}}</td>
+        </tr>
         <tdead>
             <tr class="fr">
                 <td>বিল আইডি</td>
@@ -63,7 +73,7 @@
             {% for user in users %}
             <tr>
                 <td>{{ user.bill_id }}</td>
-                <td>{{ user.description }}</td>
+                <td  class="left-align">{{ user.description }}</td>
                 <td>{{ user.food_bill }}</td>
                 <td>{{ user.hall_rent }}</td>
                 <td>{{ user.total_amount }}</td>

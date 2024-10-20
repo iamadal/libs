@@ -11,40 +11,84 @@
 </head>
 <body>
     <div class="co-container">
+
         <div class="co-header">
             <div class="header box">
                 <ul>
                     <li><img src="img/users/{{username}}.png" width="100px" height="auto"></li>
-                    <li><p class="item bnFont"> Dear, {{first_name}} {{last_name}} - {{role_name}} (বিয়াম ফাউন্ডেশন, ঢাকা) </p></li>
+                    <li><p class="item bnFont"> জনাব {{first_name}} {{last_name}} - {{role_name}} (বিয়াম ফাউন্ডেশন, ঢাকা) </p></li>
                     <li>{{message}}</li>
                 </ul>
                 <ul>
-                    <li><a class="bnFont button" href="/info">&#9993; ডাক</a></li>
+                    <li><a class="bnFont button" href="/find_bill">&#9993; বিল সমুহ</a></li>
                     <li><a class="bnFont button" href="/info">&#10016; বৃত্তান্ত</a></li>
                     <li><a class="bnFont button" href="/logout">&#9785; লগআউট</a></li>
                 </ul>
             </div>
         </div>
 
+
+
+       
+        <div class="content">
+            <!-- Rendering -->
+                {% if users is not empty %}
+    <table class="admin-table bnFont">
+        <tdead>
+            <tr class="fr">
+                <td>বিল আইডি</td>
+                <td>বিবরণ</td>
+                <td>খাবার বিল</td>
+                <td>মোট বিল</td>
+                <td>পরিশোধকৃত বিল</td>
+                <td>বকেয়া</td>
+                <td>মানি রিসিট নং</td>
+                <td>বিল তৈরীর তারিখ</td>
+            </tr>
+        </tdead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.bill_id }}</td>
+                <td  class="left-align">{{ user.description }}</td>
+                <td>{{ user.food_bill }}</td>
+                <td>{{ user.total_amount }}</td>
+                <td>{{ user.paid_amount }}</td>
+                <td class="red">{{ user.due_amount }}</td>
+                <td>{{ user.mr_no }}</td>
+                <td>{{ user.updated_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h4 class="admin-foot bnFont">খসড়া বিল নেই।</h4>
+    {% endif %}
+    <!-- End of Rendering -->
+
+
+        </div>
         <div class="container bnFont box">
+
             <div class="header">
                 <ul>
                     <li><img class="item" src="img/biam.png" alt="BIAM Logo"></li>
                     <li><p class="item bnFont">&nbsp; বিয়াম ফাউন্ডেশন, ঢাকা &nbsp;</p></li>
                 </ul>
                 <ul>
-                    <li><a class="button" href="/computer_operator">&#9751; নতুন বিল</a></li>
+                     <li><a class="button" href="/computer_operator">&#9751; নতুন বিল</a></li>
+
                 </ul>
             </div>
-
-            <form method="POST" action="/create_user">
+            <p>{{submitted}}</p>
+            <form method="POST" action="/computer_operator">
                 <input class="bnFont" type="hidden" name="csrf_token" value="{{ csrf_token }}">
                 <input class="bnFont" type="text" name="bill_id" placeholder="১২ ডিজিটের বিল আইডি( 10 DD MM YYYY NO)" required pattern="^\d{12}$">
                 <input class="bnFont" type="text" name="description" placeholder="বিলের বিবরণ" required>
                 <input class="bnFont" type="text" name="food_bill" placeholder="খাবারের বিল(টাকায়)" required pattern="^\d+(\.\d+)?$">
                 <input class="bnFont" type="text" name="paid_amount" placeholder="পরিশোধিত বিল টাকায়(সম্পূর্ণ বকেয়া থাকলে ০)" required pattern="^\d+(\.\d+)?$">
-                <input class="bnFont" type="text" name="mr_no" placeholder="মানি রিসিট নং(নম্বর অথবা মন্তব্য unpaid)" required>
-                <input class="bnFont" type="tel" name="phone" placeholder="প্রত্যাশী প্রতিষ্ঠান কোড e.g BASA">
+                <input class="bnFont" type="text" name="mr_no" placeholder="মানি রিসিট নং(নম্বর অথবা মন্তব্য)" required>
+                <input class="bnFont" type="text" name="tag" placeholder="প্রত্যাশী প্রতিষ্ঠান কোড e.g BASA">
 
                 <button class="button bnFont" type="submit"> অগ্রায়ণ(ক্যান্টিন ম্যানেজার) &#9993;</button>
                 <p class="login-text bnFont">বিল তৈরীর ফরম</p>
