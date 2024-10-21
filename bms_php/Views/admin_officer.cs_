@@ -20,7 +20,7 @@
                     <li>{{message}}</li>
                 </ul>
                 <ul>
-                    <li><a class="bnFont button" href="/find_bill">&#9993; বিল সমুহ</a></li>
+                    <li><a class="bnFont button" href="/find_bill?=all">&#9993; বিল সমুহ</a></li>
                     <li><a class="bnFont button" href="/info">&#10016; বৃত্তান্ত</a></li>
                     <li><a class="bnFont button" href="/logout">&#9785; লগআউট</a></li>
                 </ul>

@@ -21,7 +21,7 @@
               <ul>
                  <li><a class="button" href="/about">নির্দেশনা &#9728;</a></li>
                  <li><a class="button" href="/create_user">সাইনআপ &#9728;</a></li>
-                 <li><a  class="button" href="/find_bill">বিল অনুসন্ধান &#9883;</a></li>
+                 <li><a  class="button" href="/find_bill?action=all">বিল অনুসন্ধান &#9883;</a></li>
             </ul>
         </div>
 

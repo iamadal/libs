@@ -12,7 +12,7 @@ use Components\Models\Bill;
 
 ob_start();
 
-$_SESSION['notice'] = 'Bangladesh Administrative Service Association - BASA, BCS Welfare Trust - BCSWT';
+$_SESSION['notice'] = 'বিলের তালিকা অর্থ বছর ২০২৪-২৫';
 
 class app {
     private static $View;
@@ -43,7 +43,7 @@ class app {
           $password = trim(Web::sanitize($_POST['password']));
           $db       = new User();   
           $usr      = $db->auth($username,$password); 
-          $role  = $db->findUser($username);
+          $role     = $db->findUser($username);
         if($usr){
             $_SESSION['user']             = $role['username'];
             $_SESSION['role']             = $role['role_name'];
@@ -420,14 +420,8 @@ class app {
 
          if($_SESSION['role'] == "computer_operator"){
 
-
-
-
             $db = new bill();
             $data  = $db->findBill($_POST['bill_id']);
-
-
-
             if(!$data){
             $bill_id      = trim(Web::sanitize($_POST['bill_id']));
             $description  = trim(Web::sanitize($_POST['description']));
@@ -454,9 +448,6 @@ class app {
             }
 
 
-
-
-
         } else {
             session_unset();
             session_destroy();
@@ -464,37 +455,82 @@ class app {
             exit();
         }
 
-
-
-
-
-
-
-
     }
-    public static function cashier(){
-        if($_SESSION['role'] == "cashier"){
-                self::init();
-                $bills = new Bill();
-                $bdata = $bills->due_bill();
-                $db    = new User();
-                $data  = $db->findUser($_SESSION['user']); 
 
-                self::init();
-                echo self::$View->render('cashier.cs_',[
-               "first_name"=>$data['first_name'],
-               "last_name" =>$data['last_name'],
-               "role_name" =>$data['role_designation'],"users"=>$bdata]);
+
+
+
+
+
+    public static function cashier() {
+    $bdata = [];
+    
+    if ($_SESSION['role'] == "cashier") {
+        self::init();
+        $bills = new Bill();
+        
+        // Check if a search query is provided
+        if (isset($_GET['search'])) {
+            $searchQuery = trim(Web::sanitize($_GET['search']));
+            // Assuming you have a method in Bill class to search bills
+            $bdata = $bills->search($searchQuery); // searchBills() returns an array of search results
         } else {
-            session_unset();
-            session_destroy();
-            header('location: /');
-            exit();
+            // Otherwise, get all due bills
+            $bdata = $bills->due_bill();
         }
+
+        // Get user data
+        $db = new User();
+        $data = $db->findUser($_SESSION['user']);
+        self::init();
+
+        // Render the view with the relevant data
+        echo self::$View->render('cashier.cs_', [
+            "first_name" => $data['first_name'],
+            "last_name" => $data['last_name'],
+            "role_name" => $data['role_designation'],
+            "users" => $bdata, // Use the $bdata for either due bills or search result
+        ]);
+
+        // Payment processing logic
+        if (isset($_GET['bill_id']) && isset($_GET['mr_no']) && isset($_GET['payment'])) {
+            $payment = trim(Web::sanitize($_GET['payment']));
+            $mr_no = trim(Web::sanitize($_GET['mr_no']));
+            
+            // Finalize payment
+            $bdata = $bills->findBill($_GET['bill_id']);
+            $total_amount = $bdata['total_amount'];
+            $paid_amount = $bdata['paid_amount'];
+            $due_amount = $total_amount - ($payment + $paid_amount);
+            
+            if ($due_amount >= 0) {
+                $new_paid = $total_amount - $due_amount;
+                $bills->receive_cash($_GET['bill_id'], $due_amount, $_SESSION['user'], $new_paid, $mr_no);
+                header('location: /cashier');
+                exit();
+            } else {
+                header('location: /cashier');
+                exit();
+            }
+        }
+    } else {
+        // Handle session logout for non-cashier users
+        session_unset();
+        session_destroy();
+        header('location: /');
+        exit();
     }
+}
+
+
     public static function findBill(){
-        $result = '';
-        if(isset($_GET['action'])) {
+        
+        if(isset($_SESSION['user'])){
+            $db   = new User();
+            $data = $db->findUser($_SESSION['user']);
+            if($data['user_status']=='active'){
+                $result = '';
+                  if(isset($_GET['action'])) {
             $db  = new Bill();
             $response = $_GET['action'];
             
@@ -533,7 +569,23 @@ class app {
             $c = [];
         }
         self::init();
-        echo self::$View->render('bill_query.cs_',["users"=>$result,"notice"=>$_SESSION['notice'],"search_item"=>count($c)]);
+        echo self::$View->render('bill_query.cs_',[
+            "users"=>$result,
+            "notice"=>$_SESSION['notice'],
+            "search_item"=>count($c),
+            "first_name" => $data['first_name'],
+            "last_name" => $data['last_name'],
+            "role_designation" => $data['role_designation']
+        ]);
+        } else {
+            echo "<p>This ID is not approved yet. Please contact with administrator. Thanks</p>";
+        }
+
+    } else {
+       header('location: /');
+       exit();
+
+     }
     }
     public static function logout(){
         session_unset();

@@ -73,6 +73,11 @@ class Bill extends Database {
         }
     }
 
+
+
+
+
+
     public function food() {
         // Refined query to focus on bills with no hall rent
         $sql = "SELECT * FROM " . $this->table . " WHERE hall_rent = 0 AND fw_status='released' ";
@@ -194,13 +199,26 @@ public function add_hall_rent($bill_id, $hall_rent, $total_amount, $due_amount, 
     }
 
 public function due_bill() {
-    $sql = "SELECT * FROM bills WHERE due_amount > 0"; 
+    $sql = "SELECT * FROM bills WHERE due_amount > 0 AND fw_status='released' "; 
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute(); // Execute the statement
 
     // Fetch all rows that match the query
     return $stmt->fetchAll(PDO::FETCH_ASSOC); // Return as an associative array
 }
+
+public function receive_cash($bill_id, $due_amount, $money_received_by, $new_paid, $mr_no) {
+    $sql = "UPDATE bills SET due_amount = :due_amount, money_received_by = :money_received_by, paid_amount = :paid_amount, mr_no = :mr_no WHERE bill_id = :bill_id"; 
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        'due_amount' => $due_amount,
+        'money_received_by' => $money_received_by,
+        'bill_id' => $bill_id,
+        'paid_amount' => $new_paid,
+        'mr_no' => $mr_no
+    ]);
+}
+
 
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Canteen Manager - BIAM &copy; 2024</title>
+    <title>Cashier - BIAM &copy; 2024</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="fav.png">
@@ -20,7 +20,7 @@
                     <li>{{message}}</li>
                 </ul>
                 <ul>
-                    <li><a class="bnFont button" href="/find_bill">&#9993; বিল সমুহ</a></li>
+                    <li><a class="bnFont button" href="/find_bill?action=all">&#9993; বিল সমুহ</a></li>
                     <li><a class="bnFont button" href="/info">&#10016; বৃত্তান্ত</a></li>
                     <li><a class="bnFont button" href="/logout">&#9785; লগআউট</a></li>
                 </ul>
@@ -29,6 +29,16 @@
         <div class="content">
             <!-- Rendering -->
                 {% if users is not empty %}
+                <div class="Search-box">
+                     <form method="GET" action="/cashier"> 
+                        <table>
+                            <tr>
+                       <td> <input class="bnFont"  type="text" name="search" placeholder="বিল নম্বর/সংস্থা  কোড লিখুন"> </td>
+                       <td> <input class="button bnFont"  type="submit" value="খুজুন"> </td>  
+                       </tr>
+                        </table>
+                     </form>
+                </div>
     <table class="admin-table bnFont">
         <tdead>
             <tr class="fr">
@@ -40,7 +50,8 @@
                 <td>পরিশোধ</td>
                 <td>বকেয়া</td>
                 <td>বিল গ্রহন</td>
-                <td>বিল তৈরীর তারিখ</td>
+                <td>এম.আর নং</td>
+                <td>নিশ্চায়ন</td>
             </tr>
         </tdead>
         <tbody>
@@ -53,20 +64,20 @@
                 <td>{{user.total_amount}}</td>
                 <td>{{user.paid_amount}}</td>
                 <td class="red">{{user.due_amount}}</td>
-                <td class="red">
-                    <form action="/cashier" method="post">
-                        <input type="hidden" name="csrf_token">
-                        <input type="text" name="payment" placeholder="Payment" pattern="^\d+(\.\d+)?$" required>
-                        <input type="text" name="mr_no" placeholder="MR NO." pattern="^\d+(\.\d+)?$" required>
+                
+                    <form action="/cashier" method="get">
+                <td class="red"> 
+                    <input type="hidden" value="{{user.bill_id}}" name="bill_id">
+                        <input class="bnFont" type="text" name="payment" placeholder="টাকা" pattern="^\d+(\.\d+)?$" min="0" required></td>
+                        <td class="red"><input  class="bnFont" type="text"  name="mr_no" placeholder="এম আর নং" required></td>
+                        <td><input class="button bnFont bg-red" type="submit" value="Confirm"></td>
                     </form>
-                </td>
-                <td>{{user.updated_at}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-        <h4 class="admin-foot bnFont">কোন বকেয়া বিল নেই। </h4>
+        <h4 class="admin-foot bnFont"> আপনার কাঙ্খিত উপাত্ত পাওয়া যায়নি <a class="button bnFont" href="/cashier">ফিরে যান</a> </h4>
     {% endif %}
     <!-- End of Rendering -->
         </div>

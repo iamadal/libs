@@ -16,7 +16,7 @@
                  <li><p class="item bnFont">&nbsp; বিয়াম ফাউন্ডেশন, ঢাকা &nbsp;</p></li>
             </ul>
               <ul>
-                 <li><a href="/find_bill" class="button bnFont">&#10162; বিল</a></li>
+                 <li><a href="/find_bill?action=all" class="button bnFont">&#10162; বিল</a></li>
                  <li><a class="bnFont button" href="/{{dashboard}}">&#10016; ড্যাশবোর্ড</a></li>
                  <li><a class="bnFont button" href="/update_user">&#9850; তথ্য আপডেট</a></li>
                  <li><a class="bnFont button"  href="/logout">&#9943; লগআউট </a></li>
