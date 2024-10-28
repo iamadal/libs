@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honorarium Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="fav.png">
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+    <div class="container box">
+        <div class="header">
+            <img src="img/biam.png" alt="Logo">
+            <p>Honorarium Management System - v1.0</p>
+        </div>
+        <form class="form" action="/" method="POST">
+            <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+            <input type="text" id="email" name="email" placeholder="Please enter your email address" required>
+            <input type="password" id="psw" name="psw" placeholder="Enter your password" required>
+            <input class="button" type="submit" value="Sign In">
+        </form>
+        <p class="mv-center">Copyright &copy; BIAM Foundation - 2024 </p>
+    </div>
+</body>
+</html>

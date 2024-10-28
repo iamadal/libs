@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honorarium Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="fav.png">
+</head>
+<body>
+  <div class="dashboard box">
+      <div class="dashboard-header">
+        <div class="right">
+            <img src="img/biam.png" width="55px" height="auto">
+        </div>
+        <div>
+            <p class="header-text">Honorarium Management System v1.0</p>
+            <sub>User: {{user_info}}</sub>
+        </div>
+        <div class="left">
+          <a href="/dashboard" class="button">Home &#9732;</a>
+          <a href="/logout" class="button bg-brown">Logout &#9732;</a>
+      </div>
+      </div>
+
+      <div class="content">
+{% if user_info == 'admin' %}
+  <p><strong>01. Create User</strong></p>
+  <form action="/create" method="get">
+      <input  type="text" name="email" placeholder="Enter email address" required>
+      <input  type="password" name="password" placeholder="Enter Password" require>
+      <input type="submit" value="&plus; Create" class="button">
+  </form>
+  <hr>
+  <p><strong>02. List Of Active Users</strong></p>
+  <ul>
+        {% for user in admin_users %}
+            <li>
+                <a class="button bg-brown" href="/delete?delete={{user.email}}">DELETE &#9850;</a>  Username: <strong>{{ user.email }}</strong>
+                <br>
+            </li>
+        {% else %}
+            <li>No users found.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <p><strong>03. Speaker Registration Form</strong></p>
+        <form method="get" action="/dashboard">
+            <input type="text" name="sid" placeholder="Speaker ID(MAX 4 Digit. Use 1001 Form)" pattern="^\d{4}$" maxlength="4" required>
+            <input type="text" name="name" placeholder="Full Name(First and Last Name)" required>
+            <input type="text" name="designation" placeholder="Designation" required>
+            <input type="text" name="office" placeholder="Office/Institute" required>
+            <input type="text" name="hpr" placeholder="Honorarium Per Hour" pattern="^\d{5}$" required>
+            <input type="submit" value="&plus; Add Speaker"  class="button">
+        </form>
+        <hr>
+         <p><strong>04. Registered Speaker</strong></p>
+        <ul>
+                      {% for user in speakers %}
+            <li>
+                <a class="button bg-brown" href="/delete?remove={{user.sid}}">DELETE &#9850;</a>  SPEAKER ID: <strong>{{ user.sid }}</strong> SPEAKER Name: <strong>{{ user.name }}</strong> Designation: <strong>{{ user.designation }}</strong> Institute: <strong>{{ user.office }}</strong> HPH: <strong>{{ user.hpr | number_format(0, ',', ',')  }} BDT</strong>
+                <br>
+            </li>
+        {% else %}
+            <li>No users found.</li>
+        {% endfor %}
+
+{% else %}
+        </ul>
+       <
+    <!-- Content for non-admin users -->
+    <strong><p>01. Tracking a new course.</p></strong>
+    <form action="/dashboard">
+        <input type="text" name="course_title" placeholder="Course Title." required>
+        <input type="submit" value="&plus; Create" class="button">
+    </form>
+    <hr>
+    <strong><p>02. Your Course List</p></strong>
+{% endif %}
+      </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+    "name": "biam/hms",
+    "description": "Honorarium Management",
+    "require": {
+        "twig/twig": "^3.14"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Biam\\Hms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Adal Khan"
+        }
+    ],
+    "minimum-stability": "stable"
+}

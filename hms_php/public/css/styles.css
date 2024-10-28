@@ -1,0 +1,106 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+body {
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #d3d3d3;
+}
+
+.container {
+  background-color: #fff;
+  width: 50%;
+  margin: 20px auto;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    font-size: 14px;
+    width: 90%;
+  }
+
+  .container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .container {
+    width: 95%;
+  }
+}
+
+
+.box {
+  box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+.header img {width: 55px; margin: 3px}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding:  10px;
+}
+
+
+.button       {background-color: #04AA6D; border: none; border-radius: 5px; color: white;padding: 7px 12px;text-align: center;text-decoration: none; display: inline-block;font-size: 14px;margin: 2px;cursor: pointer;}
+.button:hover {background-color: #059862}
+
+input[type=text] ,input[type=password],input[type=tel]                      { width: 100%; font-size: 14px; padding: 8px; border-radius: 3px; margin: 3px ; box-sizing: border-box;border: 1px solid #ccc;-webkit-transition: 0.5s; transition: 0.5s;outline: none;}
+input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus   { border: 1px solid #059862;}
+
+form.form {
+    padding: 20px;
+}
+
+
+.mv-center {text-align: center; padding: 5px; font-size: 14px}
+
+/* Dashboard */
+.dashboard {background-color: #fff; margin-top: 10px;}
+.dashboard-header {border-bottom: 1px solid red;}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+    align-items: center;
+}
+
+.dashboard.box {
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px 0;
+}
+
+p.header-text {
+    font-size: 20px;
+    color: brown;
+}
+
+.content {padding:  5px}
+
+hr {
+    outline: 0;
+    border: none;
+    height: 1px;
+    background-color: brown;
+    margin: 5px 0;
+}
+
+ul {list-style: none;}
+.bg-brown {background-color: brown !important;}
