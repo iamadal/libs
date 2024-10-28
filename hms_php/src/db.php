@@ -71,7 +71,7 @@ public static function all_speakers()
         return [];
     }
 
-    $stmt = self::$pdo->prepare("SELECT * FROM speakers ORDER BY id DESC");
+    $stmt = self::$pdo->prepare("SELECT * FROM speakers ORDER BY sid DESC");
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
