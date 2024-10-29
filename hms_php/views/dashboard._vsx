@@ -16,68 +16,106 @@
         </div>
         <div>
             <p class="header-text">Honorarium Management System v1.0</p>
-            <sub>User: {{user_info}}</sub>
+            <sub>User: {{ user_info }}</sub>
         </div>
         <div class="left">
           <a href="/dashboard" class="button">Home &#9732;</a>
           <a href="/logout" class="button bg-brown">Logout &#9732;</a>
-      </div>
+        </div>
       </div>
 
       <div class="content">
-{% if user_info == 'admin' %}
-  <p><strong>01. Create User</strong></p>
-  <form action="/create" method="get">
-      <input  type="text" name="email" placeholder="Enter email address" required>
-      <input  type="password" name="password" placeholder="Enter Password" require>
-      <input type="submit" value="&plus; Create" class="button">
-  </form>
-  <hr>
-  <p><strong>02. List Of Active Users</strong></p>
-  <ul>
-        {% for user in admin_users %}
-            <li>
-                <a class="button bg-brown" href="/delete?delete={{user.email}}">DELETE &#9850;</a>  Username: <strong>{{ user.email }}</strong>
-                <br>
-            </li>
+        {% if user_info == 'admin' %}
+          <p><strong>01. Create User</strong></p>
+          <hr>
+          <form action="/create" method="get">
+              <input type="text" name="email" placeholder="Enter email address" required>
+              <input type="password" name="password" placeholder="Enter Password" required>
+              <input type="submit" value="&plus; Create" class="button">
+          </form>
+          <hr>
+          <p><strong>02. List Of Active Users</strong></p>
+          <hr>
+          <ul>
+            {% for user in admin_users %}
+                <li>
+                    <a class="button bg-brown" href="/delete?delete={{ user.email }}">&#9850;</a> Username: <strong>{{ user.email }}</strong>
+                </li>
+            {% else %}
+                <li>No users found.</li>
+            {% endfor %}
+          </ul>
+          <hr>
+          <p><strong>03. Speaker Registration Form</strong></p>
+          <hr>
+          <form method="get" action="/dashboard">
+              <input type="text" name="sid" placeholder="Speaker ID (4 digits)" pattern="^\d{4}$" maxlength="4" required>
+              <input type="text" name="name" placeholder="Full Name" required>
+              <input type="text" name="designation" placeholder="Designation" required>
+              <input type="text" name="office" placeholder="Office/Institute" required>
+              <input type="text" name="hpr" placeholder="Honorarium Per Hour" pattern="^\d{1,4}$" required oninput="this.value = this.value.replace(/\D/g, '')">
+              <input type="submit" value="&plus; Add Speaker" class="button">
+          </form>
+          <hr>
+          <p><strong>04. Registered Speaker</strong></p>
+          <hr>
+          <table class="speakers">
+              <tr>
+                 <th>Speaker ID</th> 
+                 <th>Name</th>
+                 <th>Designation</th>
+                 <th>Institute/Office</th>
+                 <th>Honorarium Per Hour (HPH)</th>
+                 <th>Actions</th> 
+              </tr>
+              {% for speaker in speakers %}
+                <tr>
+                   <td>{{ speaker.sid }}</td> 
+                   <td>{{ speaker.name }}</td>
+                   <td>{{ speaker.designation }}</td>
+                   <td>{{ speaker.office }}</td>
+                   <td>{{ speaker.hpr | number_format(0, ',', ',') }} BDT</td>
+                   <td><a class="button bg-brown" href="/dashboard?remove={{ speaker.sid }}">DELETE &#9850;</a></td> 
+                </tr>
+              {% else %}
+                <tr><td colspan="6">No speakers found.</td></tr>
+              {% endfor %}
+          </table>
         {% else %}
-            <li>No users found.</li>
-        {% endfor %}
-    </ul>
-    <hr>
-    <p><strong>03. Speaker Registration Form</strong></p>
-        <form method="get" action="/dashboard">
-            <input type="text" name="sid" placeholder="Speaker ID(MAX 4 Digit. Use 1001 Form)" pattern="^\d{4}$" maxlength="4" required>
-            <input type="text" name="name" placeholder="Full Name(First and Last Name)" required>
-            <input type="text" name="designation" placeholder="Designation" required>
-            <input type="text" name="office" placeholder="Office/Institute" required>
-            <input type="text" name="hpr" placeholder="Honorarium Per Hour" pattern="^\d{5}$" required>
-            <input type="submit" value="&plus; Add Speaker"  class="button">
-        </form>
-        <hr>
-         <p><strong>04. Registered Speaker</strong></p>
-        <ul>
-                      {% for user in speakers %}
-            <li>
-                <a class="button bg-brown" href="/delete?remove={{user.sid}}">DELETE &#9850;</a>  SPEAKER ID: <strong>{{ user.sid }}</strong> SPEAKER Name: <strong>{{ user.name }}</strong> Designation: <strong>{{ user.designation }}</strong> Institute: <strong>{{ user.office }}</strong> HPH: <strong>{{ user.hpr | number_format(0, ',', ',')  }} BDT</strong>
-                <br>
-            </li>
-        {% else %}
-            <li>No users found.</li>
-        {% endfor %}
-
-{% else %}
-        </ul>
-       <
-    <!-- Content for non-admin users -->
-    <strong><p>01. Tracking a new course.</p></strong>
-    <form action="/dashboard">
-        <input type="text" name="course_title" placeholder="Course Title." required>
-        <input type="submit" value="&plus; Create" class="button">
-    </form>
-    <hr>
-    <strong><p>02. Your Course List</p></strong>
-{% endif %}
+          <p><strong>01. Track a New Course</strong></p>
+          <hr>
+          <form action="/dashboard" method="get">
+              <input type="text" name="new_course" placeholder="Course Description(E.G 14th DFTC of PGCB from 10 OCT 24 to 16 DEC 24)" required>
+              <input type="submit" value="&plus; Create" class="button">
+          </form>
+          <hr>
+          <p><strong>02. Your Course List</strong>  <button id="btnRemove" class="button btnRemove bg-brown">Remove Course</button></p>
+          <hr>
+          <table class="course-list">
+              <tr>
+                 <th class="hide del"></th>
+                 <th>Tracking ID</th>
+                 <th>Description</th>
+                 <th>Created</th>
+                 <th>Honorarium</th>
+               
+               
+              </tr>
+              {% for course in courseList %}
+                <tr>
+                   <td class="hide del"><a href="/dashboard?courseDelete={{course.tracking_id}}" class="button bg-brown">&times;</a></td>
+                   <td><strong>{{ course.tracking_id }}</strong></td>
+                   <td>{{ course.description }}</td>
+                     <td>{{ course.started | date("d/m/Y")  }}</td>
+                   <td><a href="/honorarium?id={{course.tracking_id}}&desc={{course.description}}" class="button">&plus; View</a></td>
+                 
+                   
+                </tr>
+              {% else %}
+                <tr><td colspan="3">No courses found.</td></tr>
+              {% endfor %}
+          </table>
+        {% endif %}
       </div>
   </div>
 </body>
