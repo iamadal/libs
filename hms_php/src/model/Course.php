@@ -6,3 +6,8 @@ namespace Biam\Hms\model;
 use PDO;
 use PDOException;
 
+class Course {
+	private $table;
+
+	}
+}

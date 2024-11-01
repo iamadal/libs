@@ -121,12 +121,6 @@ if (isset($_SESSION['email']) && isset($_GET['courseDelete'])) {
 }
 
 
-
-
-
-
-
-
         $db = new PDO('sqlite:' . __DIR__ . '/../data/course.db');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -177,7 +171,8 @@ if (isset($_SESSION['email']) && isset($_GET['courseDelete'])) {
 
 public static function honorarium() {
     if (isset($_GET['id']) && isset($_GET['desc'])) {
-        // Sanitize input to prevent SQL injection and invalid table names
+        $_SESSION['course_id']   = Router::sanitize($_GET['id']);
+        $_SESSION['description'] = Router::sanitize($_GET['desc']);
         $id = preg_replace('/[^a-zA-Z0-9_]/', '', $_GET['id']); // Allow only alphanumeric and underscores
         $desc = htmlspecialchars($_GET['desc']); // Sanitize description
 
@@ -188,25 +183,29 @@ public static function honorarium() {
         $sql = "CREATE TABLE IF NOT EXISTS `$id` (
             SID INTEGER PRIMARY KEY CHECK (SID BETWEEN 1000 AND 9999),
             Designation TEXT,
-            CST REAL,
-            CET REAL,
+            Topic Text,
+            CDate Text,
+            CST datetime,
+            CET datetime,
             Duration REAL,
             HPH REAL,
             Total REAL,
             VAT REAL,
-            Payable_Amount REAL
+            Net_Pay REAL
         )";
 
         try {
             $stmt = $db->prepare($sql);
             $stmt->execute();
-            echo "Table `$id` created successfully or already exists.";
-        } catch (PDOException $e) {
-            echo "Error creating table: " . $e->getMessage();
-        }
-    } else {
-        echo "Missing required parameters.";
+            header('location: /honorarium');
+            exit();
+        
+        } catch (PDOException $e) {}
     }
+
+            self::init();
+        echo self::$view->render('honorarium._vsx', ["course_id"=>$_SESSION['course_id'], "description"=>$_SESSION['description'],"user_info"=>$_SESSION['email']]);
+
 }
 
 

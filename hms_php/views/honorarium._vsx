@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honorarium Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+   
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fav.png">
+</head>
+<body>
+  <div class="dashboard box">
+      <div class="dashboard-header">
+        <div class="right">
+            <img src="img/biam.png" width="55px" height="auto">
+        </div>
+        <div>
+            <p class="header-text">Honorarium Management System v1.0</p>
+            <sub>User: {{ user_info }}</sub> 
+            <p>{{ course_id }}: {{description}} </p>
+        </div>
+        <div class="left">
+          <a href="/dashboard" class="button">Dashboard </a>
+          <a href="/Honorarium?=add" class="button">Add </a>
+          <a href="/Honorarium?=all" class="button">Speaker List</a>
+          <a href="/Honorarium?=all" class="button">Honorarium List</a>
+          <a href="/logout" class="button bg-brown">Logout &#9732;</a>
+        </div>
+      </div>
+      <div class="hcontent">
+           <!-- Add Honorarium -->
+           <br>
+           <p align="center">Add New honorarium for: {{description}}</p> 
+           <br>
+           <div class="add-honorarium">
+              
+              <input id="speaker_name" type="text" name="speaker"  placeholder="Search Speaker from here.." autocomplete="off" required>
+              <div id="suggestions" class="suggestions"></div>
+              <form class="warp box" action="/Honorarium?=add">
+               <br>  <p align="center">Please insert speaker info. from the search box or insert your own. </p><br>
+              <b>Speaker Name:  <input id="speaker" type="text" name="speaker"  placeholder="Enter Speaker name(Manual Entry or User Search Box..)" required> <br>
+                Speaker ID:<input id="sid" type="text" maxlength="4"      placeholder="Enter 4 digit Speaker ID(Not applicable for automatic entry) " pattern="^\d{4}$" required> <br>
+                Designation:<input id="designation" type="text" name="Designation" placeholder="Designation(e.g Prof. , Asst. Prof)" required><br>
+                Office/Institute:<input id="office" type="text" name="office"      placeholder="Institution(e.g University of Dhaka)" required><br>
+                Honorarium(BDT):<input id="honorarium" type="text" maxlength="4" pattern="^\d{4}$"   placeholder="Honorarium Per Hour(e.g 4600)" required><br><br>
+                <label>Date of Lecture:</label> <input type="date" required>
+                <label>Start Time:</label>  <input type="time" required>
+                <label>End Time:</label>    <input type="time" required></b>
+              <input type="submit" value="Save" class="button">
+           </form>
+           <br><br>
+           </div>
+
+
+        <div class="add-honorarium">  
+
+         <p align="center">Recently Added Honorarium(Unpaid)</p>
+      </div>
+      <hr>
+  </div>
+</body>
+ <script type="text/javascript" src="js/script.js"></script>
+</html>

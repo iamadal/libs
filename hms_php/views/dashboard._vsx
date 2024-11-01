@@ -97,7 +97,6 @@
                  <th>Tracking ID</th>
                  <th>Description</th>
                  <th>Created</th>
-                 <th>Honorarium</th>
                
                
               </tr>
@@ -106,10 +105,7 @@
                    <td class="hide del"><a href="/dashboard?courseDelete={{course.tracking_id}}" class="button bg-brown">&times;</a></td>
                    <td><strong>{{ course.tracking_id }}</strong></td>
                    <td>{{ course.description }}</td>
-                     <td>{{ course.started | date("d/m/Y")  }}</td>
-                   <td><a href="/honorarium?id={{course.tracking_id}}&desc={{course.description}}" class="button">&plus; View</a></td>
-                 
-                   
+                     <td>{{ course.started | date("d/m/Y")  }} <a href="/honorarium?id={{course.tracking_id}}&desc={{course.description}}" class="button"> View</a></td>
                 </tr>
               {% else %}
                 <tr><td colspan="3">No courses found.</td></tr>
