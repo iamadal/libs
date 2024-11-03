@@ -140,7 +140,7 @@ ul {list-style: none; }
 
 
 .course-list {width:  100%; margin: 0 auto; word-break: break-all;}
-.course-list th,td {text-align: left; border-bottom: 1px solid #d3d3d3; padding: 3px;}
+.course-list table,th,td {text-align: left; border-collapse: collapse ;border-bottom: 1px solid #d3d3d3; padding: 3px;}
 
 .hide {display: none;}
 
@@ -169,8 +169,8 @@ ul {list-style: none; }
   border-bottom: 1px solid #d4d4d4; 
         }
         .suggestion-item:hover {
-            background-color: #f0f0f0;
-            font-weight: bold;
+            background-color: red;
+            color:  #fff;
         }
 
  
@@ -202,4 +202,21 @@ form.warp {
     margin: 5px;
     padding: 30px;
     border-radius: 3px;
+}
+
+table.honorarium-table {
+    margin: 0 auto;
+    font-size: 12.5px;
+    border-collapse: collapse;
+
+}
+
+table.honorarium-table  table,th,tr,td {border:  1px solid #d3d3d3}
+table.honorarium-table tr:hover {background-color:  #d3d3d3; cursor:  pointer}
+
+.search {
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }

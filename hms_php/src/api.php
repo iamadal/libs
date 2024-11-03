@@ -1,5 +1,6 @@
 <?php
 
+
 $user_db   = __DIR__ . '/../data/users.db';
 $course_db = __DIR__ . '/../data/course.db';
 
@@ -81,6 +82,17 @@ function readSpeakerByName($speakerName) {
     } else {
         return false;
     }
+}
+
+
+
+function updateSpeaker(){
+   echo "Working";
+}
+
+
+function createHonorarium(){
+
 }
 
 // Ajax Request Handling

@@ -4,8 +4,11 @@ namespace Biam\Hms;
 
 use Biam\Hms\Router;
 use Biam\Hms\DB;
+use Biam\Hms\Model\Course;
+
 use PDO;
 use PDOException;
+
 
 class App {
     private static $view;
@@ -170,6 +173,7 @@ if (isset($_SESSION['email']) && isset($_GET['courseDelete'])) {
 
 
 public static function honorarium() {
+    $hl = 0;
     if (isset($_GET['id']) && isset($_GET['desc'])) {
         $_SESSION['course_id']   = Router::sanitize($_GET['id']);
         $_SESSION['description'] = Router::sanitize($_GET['desc']);
@@ -203,8 +207,61 @@ public static function honorarium() {
         } catch (PDOException $e) {}
     }
 
+
+      if (
+            isset($_GET['speaker_name']) &&
+            isset($_GET['sid']) &&
+            isset($_GET['Designation']) &&
+            isset($_GET['office']) &&
+            isset($_GET['honorarium']) &&
+            isset($_GET['lecture_date']) &&
+            isset($_GET['cst']) &&
+            isset($_GET['cet'])){ 
+
+            //01. Update Speaker info
+            //02. Create Honorarium Table
+
+        $HPR = new Course(__DIR__ . "/../data/course.db");
+
+
+        $speakerId     = Router::sanitize(trim( $_GET['sid'] ));
+        $name          = Router::sanitize(trim( $_GET['speaker_name'] ));
+        $description   = Router::sanitize(trim( $_GET['Designation'] . ',' . $_GET['office'] ));
+        $topic         = Router::sanitize(trim( $_GET['topic']));
+        $lectureDate   = Router::sanitize(trim( $_GET['lecture_date']));
+        $cst           = Router::sanitize(trim( $_GET['cst'] ));
+        $cet           = Router::sanitize(trim( $_GET['cet']));
+
+         $startTime = \DateTime::createFromFormat('H:i', $cst);
+           $endTime = \DateTime::createFromFormat('H:i', $cet);
+
+    if ($endTime < $startTime) {
+        $endTime->modify('+1 day');
+    }
+
+        $duration        = $startTime->diff($endTime);
+        $durationString  = $duration->h . ' hours, ' . $duration->i . ' minutes';
+        $durationInHours = $duration->h + ($duration->i / 60);
+        $honorarium      = $durationInHours * Router::sanitize(trim($_GET['honorarium'])); 
+        $payment         = 'Unpaid';
+        $HPR->addHonorarium($speakerId,$name,$description,$topic,$lectureDate,$cst,$cet,$durationString,$honorarium,$payment);
+        $HPR->close();
+        $dbs = new Course(__DIR__ . "/../data/users.db");
+        $dbs->addOrUpdateSpeaker(Router::sanitize(trim( $_GET['sid'] )),Router::sanitize(trim( $_GET['speaker_name'] )), Router::sanitize(trim( $_GET['Designation'])) , $_GET['office'], $_GET['honorarium'] );
+
+        header('location: /honorarium');
+        exit();
+}
+            $db = new Course(__DIR__ . "/../data/course.db");
+            $honorarium = $db->all();
+            $db->close();
+
+           
+            if(isset($_GET['hl'])) {$hl=1;}
+
+
             self::init();
-        echo self::$view->render('honorarium._vsx', ["course_id"=>$_SESSION['course_id'], "description"=>$_SESSION['description'],"user_info"=>$_SESSION['email']]);
+        echo self::$view->render('honorarium._vsx', ["course_id"=>$_SESSION['course_id'], "description"=>$_SESSION['description'],"user_info"=>$_SESSION['email'],"hr"=>$honorarium,"hl"=>$hl]);
 
 }
 
