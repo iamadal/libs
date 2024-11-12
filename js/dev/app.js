@@ -1,0 +1,1 @@
+var Obj == new Object()
