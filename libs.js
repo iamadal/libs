@@ -1,1 +1,1 @@
-// This is a test
+console.log("Creating the file on load")
