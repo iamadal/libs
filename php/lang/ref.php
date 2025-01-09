@@ -46,5 +46,6 @@
 
 # 05. Type declaration(adding static typing) 
 # 06. Type Juggling  
+# 07. 
 
  
