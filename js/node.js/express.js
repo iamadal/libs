@@ -32,7 +32,11 @@ app.use(express.static('public'))
 Note:
 // 01. If you use app.use() in index.js file then this will be global middleware and will be applied for all routes automatically
 
-/* Authentication */
+/**
+ * Notes
+ * 
+ * 
+ */
 
 
 
